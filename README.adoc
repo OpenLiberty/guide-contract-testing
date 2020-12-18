@@ -87,7 +87,7 @@ Creating pact-broker_pact-broker_1 ... done
 
 Go to http://localhost:9292/[^] to confirm that you can access the pact broker's UI.
 
-image::pact-broker-webpage.png[Pact broker application, width=550, height=250, align="center"]
+image::pact-broker-webpage.png[Pact broker application, width=450, height=250, align="center"]
 
 You can refer to the official https://docs.pact.io/pact_broker/docker_images/pactfoundation[Pact Broker^]
 documentation for more information about the components of the docker compose file.
@@ -212,13 +212,13 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 Refresh the pact broker URL at http://localhost:9292/[^] to verify that a new entry was added. Note there is no
 timestamp in the `Last verified` column as the pact is yet to be verified by the `system` microservice.
 
-image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=250, align="center"]
+image::pact-broker-webpage-refresh.png[Pact broker application, width=450, height=250, align="center"]
 
 You can also see the interactions URL at http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] for more insights about each interaction that was created.
 
 A snippet of the interaction page looks similar to:
 
-image::pact-broker-interactions.png[Pact broker application, width=550, height=250, align="center"]
+image::pact-broker-interactions.png[Pact broker application, width=450, height=250, align="center"]
 
 == Implementing pact test in the system service
 
@@ -305,7 +305,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 ```
 When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the `Last verified` column.
 
-image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=250, align="center"]
+image::pact-broker-webpage-verified.png[Pact broker application, width=450, height=250, align="center"]
 
 The pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the pact broker application.
 This ensures that responses from the `system` microservice meet the expectation of the `inventory` microservice.
