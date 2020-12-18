@@ -305,7 +305,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 ```
 When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the `Last verified` column.
 
-image::pact-broker-webpage-verified.png[Pact broker application, width=450, height=250, align="left"]
+image::pact-broker-webpage-verified.png[Pact broker application, width=450, height=250, align="center"]
 
 The pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the pact broker application.
 This ensures that responses from the `system` microservice meet the expectation of the `inventory` microservice.
