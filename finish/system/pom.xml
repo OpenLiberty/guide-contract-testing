@@ -73,7 +73,9 @@
                 <configuration>
                     <systemPropertyVariables>
                         <http.port>${liberty.var.default.http.port}</http.port>
+                        <!-- tag::version[] -->
                         <pact.provider.version>${project.version}</pact.provider.version>
+                        <!-- end::version[] -->
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
