@@ -212,13 +212,13 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 Refresh the pact broker URL at http://localhost:9292/[^] to verify that a new entry was added. Note there is no
 timestamp in the `Last verified` column as the pact is yet to be verified by the `system` microservice.
 
-image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=225, align="left"]
+image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=275, align="left"]
 
 You can also see the interactions URL at http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] for more insights about each interaction that was created.
 
 A snippet of the interaction page looks similar to:
 
-image::pact-broker-interactions.png[Pact broker application, width=550, height=225, align="left"]
+image::pact-broker-interactions.png[Pact broker application, width=550, height=450, align="left"]
 
 == Implementing pact test in the system service
 
@@ -306,7 +306,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 ```
 When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the `Last verified` column.
 
-image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=225, align="left"]
+image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=325, align="left"]
 
 The pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the pact broker application.
 This ensures that responses from the `system` microservice meet the expectation of the `inventory` microservice.
