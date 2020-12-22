@@ -23,7 +23,6 @@
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
 :imagesdir: /img/guide/{projectid}
-
 = Testing microservices with Consumer Driven Contracts
 
 [.hidden]
