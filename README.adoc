@@ -15,7 +15,6 @@
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
 :page-seo-title: Implementing consumer driven contract testing for Java microservices and Cloud-native applications.
 :page-seo-description: A getting started tutorial on implementing consumer driven contract testing for Java microservices and Cloud-native applications.
-:guide-author: Open Liberty
 :page-tags: ['MicroProfile', 'Java EE', 'Jakarta EE', 'Contract Testing', 'Consumer Driven Test']
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
 :page-permalink: /guides/{projectid}
@@ -23,7 +22,7 @@
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
 :imagesdir: /img/guide/{projectid}
-
+:guide-author: Open Liberty
 = Testing microservices with Consumer Driven Contracts
 
 [.hidden]
