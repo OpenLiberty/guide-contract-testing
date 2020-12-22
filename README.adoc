@@ -118,7 +118,7 @@ The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice a
 The [hotspot=builder file=0]`createPactEncoding()` method defines the minimal expected response for a specific endpoint and is also known as an interaction.
 For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
 
-The test sends a real request by the [hotspot=mockTest file=0]`getUrl` method of the mock provider. The mock provider compares the actual request with the expected request and confirms if the comparison is successful.
+The test sends a real request by the [hotspot=mockTest file=0]`getUrl()` method of the mock provider. The mock provider compares the actual request with the expected request and confirms if the comparison is successful.
 Finally, the [hotspot=unitTest file=0]`assertEquals()` confirms that the response is correct.
 
 [role="code_command hotspot file=0", subs="quotes"]
