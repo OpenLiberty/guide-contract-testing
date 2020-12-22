@@ -58,18 +58,18 @@
                 <version>4.1.0</version>
                 <configuration>
                     <serviceProviders>
+                        // tag::serviceProvider[]
                         <serviceProvider>
                             <name>System</name>
-                            // tag::endpoint[]
                             <protocol>http</protocol>
                             <host>localhost</host>
                             <port>9080</port>
-                            // end::endpoint[]
                             <path>/</path>
                             // tag::pactDirectory[]
                             <pactFileDirectory>target/pacts</pactFileDirectory>
                             // end::pactDirectory[]
                         </serviceProvider>
+                        // end::serviceProvider[]
                     </serviceProviders>
                     <projectVersion>${project.version}</projectVersion>
                     <skipPactPublish>false</skipPactPublish>

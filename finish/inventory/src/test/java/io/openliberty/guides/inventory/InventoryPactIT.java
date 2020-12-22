@@ -36,10 +36,11 @@ public class InventoryPactIT {
     // tag::pact[]
     @Pact(consumer = "Inventory")
     // end::pact[]
+    // tag::builder[]
     public RequestResponsePact createPactEncoding(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-        // tag::builder[]
+
         return builder
                 // tag::given[]
                 .given("os.encoding is UTF-8")
@@ -53,9 +54,8 @@ public class InventoryPactIT {
                 .body(new PactDslJsonArray().object()
                         .stringValue("os.encoding", "UTF-8"))
                 .toPact();
-        // end::builder[]
     }
-
+    // end::builder[]
     @Pact(consumer = "Inventory")
     public RequestResponsePact createPactEdition(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<String, String>();
@@ -101,7 +101,8 @@ public class InventoryPactIT {
         String encoding = new Inventory(mockProvider.getUrl()).getEncoding();
         // end::mockTest[]
         // tag::unitTest[]
-        assertEquals("Expected encoding does not match", "[{\"os.encoding\":\"UTF-8\"}]", encoding);
+        assertEquals("Expected encoding does not match",
+                     "[{\"os.encoding\":\"UTF-8\"}]", encoding);
         // end::unitTest[]
     }
 
@@ -109,13 +110,15 @@ public class InventoryPactIT {
     @PactVerification(value = "System", fragment = "createPactEdition")
     public void runEditionTest() {
         String edition = new Inventory(mockProvider.getUrl()).getEdition();
-        assertEquals("Expected edition does not match", "[{\"wlp.user.dir.isDefault\":\"true\"}]", edition);
+        assertEquals("Expected edition does not match",
+                     "[{\"wlp.user.dir.isDefault\":\"true\"}]", edition);
     }
 
     @Test
     @PactVerification(value = "System", fragment = "createPactVersion")
     public void runVersionTest() {
         String version = new Inventory(mockProvider.getUrl()).getVersion();
-        assertEquals("Expected version does not match", "[{\"system.properties.version\":1.1}]", version);
+        assertEquals("Expected version does not match",
+                     "[{\"system.properties.version\":1.1}]", version);
     }
 }

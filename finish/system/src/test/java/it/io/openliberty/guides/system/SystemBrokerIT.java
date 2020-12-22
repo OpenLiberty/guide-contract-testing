@@ -45,12 +45,14 @@ public class SystemBrokerIT {
   }
   // end::context[]
   // end::invocation[]
+
   @BeforeAll
   // tag::publish[]
   static void enablePublishingPact() {
     System.setProperty("pact.verifier.publishResults", "true");
   }
   // end::publish[]
+
   @BeforeEach
   void before(PactVerificationContext context) {
     int port = Integer.parseInt(System.getProperty("http.port"));
