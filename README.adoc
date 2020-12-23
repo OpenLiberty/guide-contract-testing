@@ -8,13 +8,14 @@
 //
 :projectid: contract-testing
 :page-layout: guide-multipane
-:page-duration: 25 minutes
-:page-releasedate: 2020-12-16
+:page-duration: 30 minutes
+:page-releasedate: 2020-12-22
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
 :page-seo-title: Implementing consumer driven contract testing for Java microservices and Cloud-native applications.
 :page-seo-description: A getting started tutorial on implementing consumer driven contract testing for Java microservices and Cloud-native applications.
+:guide-author: Open Liberty
 :page-tags: ['MicroProfile', 'Java EE', 'Jakarta EE', 'Contract Testing', 'Consumer Driven Test']
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
 :page-permalink: /guides/{projectid}
@@ -22,7 +23,6 @@
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
 :source-highlighter: prettify
 :imagesdir: /img/guide/{projectid}
-:guide-author: Open Liberty
 = Testing microservices with Consumer Driven Contracts
 
 [.hidden]
@@ -56,7 +56,7 @@ https://docs.pact.io/[Pact^] is an open source contract testing tool for testing
 The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into CI/CD pipelines.
 
 The two microservices you will interact with are called `system` and `inventory`. The `system` microservice returns the JVM
-`system` properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice. You will
+system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice. You will
 learn how to use the https://docs.pact.io/[Pact^] framework to write contract tests for the `inventory` microservice to be verified by
 the `system` microservice.
 
@@ -112,29 +112,29 @@ inventory/pom.xml
 include::finish/inventory/pom.xml[]
 ----
 
-The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`mock provider` that mimics the HTTP responses from the `system` microservice.
-The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice as a parameter that makes it easier to differentiate microservices from one another when there are multiple applications.
-
-The [hotspot=builder file=0]`RequestResponsePact` method defines the minimal expected response for a specific endpoint and is also known as an interaction.
-For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
-
-The test sends a real request to the [hotspot=mockTest file=0]`mock provider`. The mock provider compares the actual request with the expected request and confirms if the comparison is successful.
-Finally, the [hotspot=unitTest file=0]`unit test` confirms that the response is correct.
-
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the InventoryPactIT.java file.#
 `src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
 ----
 
-The pact framework provides an [hotspot=pactPlugin file=1]`extension` that can be added to the build section of the `pom.xml`. It contains the [hotspot=endpoint file=1]`endpoint` URL for the `system` microservice and the [hotspot=pactDirectory file=1]`location` at which the pact file is to be stored.
-The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class for use with JUnit to build the unit tests.
+The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`PactProviderRule` mock provider that mimics the HTTP responses from the `system` microservice.
+The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice as a parameter that makes it easier to differentiate microservices from one another when there are multiple applications.
+
+The [hotspot=builder file=0]`createPactEncoding()` method defines the minimal expected response for a specific endpoint and is also known as an interaction.
+For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
+
+The test sends a real request by the [hotspot=mockTest file=0]`getUrl()` method of the mock provider. The mock provider compares the actual request with the expected request and confirms if the comparison is successful.
+Finally, the [hotspot=unitTest file=0]`assertEquals()` confirms that the response is correct.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
 #Replace the inventory pom file.#
 `inventory/pom.xml`
 ----
+
+The pact framework provides a [hotspot=pactPlugin file=1]`maven` extension that can be added to the build section of the `pom.xml`. The endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` at which the pact file is to be stored is defined in the [hotspot=serviceProvider file=1]`serviceProvider` element.
+The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class for use with JUnit to build the unit tests.
 
 After you create `InventoryPactIT.java` and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
@@ -208,12 +208,12 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 
 == Verifying the pact in pact broker
 
-Refresh the pact broker URL at http://localhost:9292/[^] to verify that a new entry was added. Note there is no
-timestamp in the `Last verified` column as the pact is yet to be verified by the `system` microservice.
+Refresh the pact broker URL at http://localhost:9292/[^] to verify that there is a new entry. Note there is no
+timestamp in the last verified column as the pact is yet to be verified by the `system` microservice.
 
 image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=275, align="left"]
 
-You can also see the interactions URL at http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] for more insights about each interaction that was created.
+You can also see the interactions URL at http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] for more insights about each interaction.
 
 A snippet of the interaction page looks similar to:
 
@@ -255,28 +255,28 @@ After you see the following message, your application server in dev mode is read
 *    Liberty is running in dev mode.
 ----
 
-The connection information for the pact broker is provided with the [hotspot=connectionInfo file=0]`@PactBroker` annotation. The dependency also provides a [hotspot=invocation file=0]`JUnit5 Invocation Context Provider` to write pact verification tests that are used with the `@TestTemplate` annotation to generate a test for each of the interactions.
-
-A `system` property is set to true for [hotspot=publish file=0]`pact.verifier.publishResults` so that the results are sent to the pact broker after the tests are completed.
-
-The test target is defined in the [hotspot=context file=0]`PactVerificationContext` to point to the running endpoint of the `system` microservice.
-
-The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=2]`.given()` parameter that was provided in the `inventory` test class so that pact can identify which test case to run against which endpoint.
-
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the SystemBrokerIT.java file.#
 `src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
 ----
 
-[hotspot=pactDependency file=1]`Junit5 pact provider` dependency is used for the `system` microservice to connect to the pact broker to verify the pact file.
-Ideally, in a CI/CD pipeline, the [hotspot=version file=1]`pact.provider.version` is dynamically set to the build number so that it is easier to identify at which point a breaking change is introduced.
+The connection information for the pact broker is provided with the [hotspot=connectionInfo file=0]`@PactBroker` annotation. The dependency also provides a JUnit5 Invocation Context Provider by the [hotspot=invocation file=0]`pactVerificationTestTemplate` method to generate a test for each of the interactions.
+
+The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to true so that the results are sent to the pact broker after the tests are completed.
+
+The test target is defined in the [hotspot=context file=0]`PactVerificationContext` context to point to the running endpoint of the `system` microservice.
+
+The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=2]`given()` parameter that was provided in the `inventory` test class so that pact can identify which test case to run against which endpoint.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
 #Replace the system pom file.#
 `system/pom.xml`
 ----
+
+[hotspot=pactDependency file=1]`Junit5` pact provider dependency is used for the `system` microservice to connect to the pact broker to verify the pact file.
+Ideally, in a CI/CD pipeline, the [hotspot=version file=1]`pact.provider.version` element is dynamically set to the build number so that it is easier to identify at which point a breaking change is introduced.
 
 After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
@@ -312,8 +312,8 @@ This ensures that responses from the `system` microservice meet the expectation 
 
 == Tearing down the environment
 
-[role=command]
-include::{common-includes}/devmode-quit.adoc[]
+When you are done checking out the service, exit dev mode by pressing `CTRL+C` in the command-line sessions
+where you ran the servers for `system` and `inventory`, or by typing `q` and then pressing the `enter/return` key.
 
 Navigate back to `/guide-contract-testing` directory and run the following commands to remove the pact broker application.
 [role='command']

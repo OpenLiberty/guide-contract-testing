@@ -51,7 +51,7 @@ public class InventoryPactIT {
                 .headers(headers)
                 .status(200)
                 .body(new PactDslJsonArray().object()
-                        .stringValue("os.encoding", "UTF-8"))
+                        .stringType("os.encoding", "UTF-8"))
                 .toPact();
         // end::builder[]
     }
