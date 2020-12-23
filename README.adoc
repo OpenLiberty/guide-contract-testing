@@ -156,7 +156,7 @@ When completed, you will see a similar output to the following example:
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
 ```
 
-When integrating pact in a CI/CD pipeline, the `mvn verify` goal can be used instead to generate the pact file.
+When integrating the pact framework in a CI/CD build pipeline, the `mvn verify` goal can be used instead to generate the pact file.
 
 The generated pact file is named `Inventory-System.json` and is located in `inventory/target/pacts`. It contains the defined interactions in `.json` format:
 
@@ -275,14 +275,14 @@ The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file
 `system/pom.xml`
 ----
 
-[hotspot=pactDependency file=1]`Junit5` pact provider dependency is used for the `system` microservice to connect to the pact broker to verify the pact file.
+The [hotspot=pactDependency file=1]`Junit5` pact provider dependency is used for the `system` microservice to connect to the pact broker to verify the pact file.
 Ideally, in a CI/CD pipeline, the [hotspot=version file=1]`pact.provider.version` element is dynamically set to the build number so that it is easier to identify at which point a breaking change is introduced.
 
 After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
 == Verifying the contract
 
-In the command-line session where the system microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating pact in a CI/CD pipeline, the `mvn test` goal can be used instead to verify the pact file from the pact broker.
+In the command-line session where the system microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn test` goal can be used instead to verify the pact file from the pact broker.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
@@ -303,12 +303,12 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
 ...
 ```
-When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the `Last verified` column.
+When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
 
 image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=325, align="left"]
 
 The pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the pact broker application.
-This ensures that responses from the `system` microservice meet the expectation of the `inventory` microservice.
+This ensures that responses from the `system` microservice meet the expectations of the `inventory` microservice.
 
 == Tearing down the environment
 
