@@ -37,22 +37,22 @@ public class InventoryPactIT {
     @Pact(consumer = "Inventory")
     // end::pact[]
     // tag::builder[]
-    public RequestResponsePact createPactEncoding(PactDslWithProvider builder) {
+    public RequestResponsePact createPactServer(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
 
         return builder
                 // tag::given[]
-                .given("os.encoding is UTF-8")
+                .given("wlp.server.name is defaultServer")
                 // end::given[]
-                .uponReceiving("a request for os encoding entity")
-                .path("/system/properties/key/os.encoding")
+                .uponReceiving("a request for server name")
+                .path("/system/properties/key/wlp.server.name")
                 .method("GET")
                 .willRespondWith()
                 .headers(headers)
                 .status(200)
                 .body(new PactDslJsonArray().object()
-                        .stringType("os.encoding", "UTF-8"))
+                        .stringValue("wlp.server.name", "defaultServer"))
                 .toPact();
     }
     // end::builder[]
@@ -94,15 +94,15 @@ public class InventoryPactIT {
 
     @Test
     // tag::verification[]
-    @PactVerification(value = "System", fragment = "createPactEncoding")
+    @PactVerification(value = "System", fragment = "createPactServer")
     // end::verification[]
-    public void runEncodingTest() {
+    public void runServerTest() {
         // tag::mockTest[]
-        String encoding = new Inventory(mockProvider.getUrl()).getEncoding();
+        String serverName = new Inventory(mockProvider.getUrl()).getServerName();
         // end::mockTest[]
         // tag::unitTest[]
-        assertEquals("Expected encoding does not match",
-                     "[{\"os.encoding\":\"UTF-8\"}]", encoding);
+        assertEquals("Expected server name does not match",
+                     "[{\"wlp.server.name\":\"defaultServer\"}]", serverName);
         // end::unitTest[]
     }
 

@@ -82,7 +82,7 @@ Creating pact-broker_pact-broker_1 ... done
 
 Go to http://localhost:9292/[^] to confirm that you can access the pact broker's UI.
 
-image::pact-broker-webpage.png[Pact broker application, width=550, height=225, align="left"]
+image::pact-broker-webpage.png[Pact broker application, align="left"]
 
 You can refer to the official https://docs.pact.io/pact_broker/docker_images/pactfoundation[Pact Broker^]
 documentation for more information about the components of the docker compose file.
@@ -117,7 +117,7 @@ include::finish/inventory/pom.xml[]
 The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`PactProviderRule` mock provider that mimics the HTTP responses from the `system` microservice.
 The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice as a parameter that makes it easier to differentiate microservices from one another when there are multiple applications.
 
-The [hotspot=builder file=0]`createPactEncoding()` method defines the minimal expected response for a specific endpoint and is also known as an interaction.
+The [hotspot=builder file=0]`createPactServer()` method defines the minimal expected response for a specific endpoint and is also known as an interaction.
 For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
 
 The test sends a real request by the [hotspot=mockTest file=0]`getUrl()` method of the mock provider. The mock provider compares the actual request with the expected request and confirms if the comparison is successful.
@@ -162,10 +162,10 @@ The generated pact file is named `Inventory-System.json` and is located in `inve
 ...
 "interactions": [
 {
-      "description": "a request for os encoding entity",
+      "description": "a request for server name",
       "request": {
         "method": "GET",
-        "path": "/system/properties/key/os.encoding"
+        "path": "/system/properties/key/wlp.server.name"
       },
       "response": {
         "status": 200,
@@ -174,25 +174,13 @@ The generated pact file is named `Inventory-System.json` and is located in `inve
         },
         "body": [
           {
-            "os.encoding": "UTF-8"
+            "wlp.server.name": "defaultServer"
           }
-        ],
-        "matchingRules": {
-          "body": {
-            "$[0]['os.encoding']": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            }
-          }
-        }
+        ]
       },
       "providerStates": [
         {
-          "name": "os.encoding is UTF-8"
+          "name": "wlp.server.name is defaultServer"
         }
       ]
     }
@@ -219,13 +207,13 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 Refresh the pact broker webpage at http://localhost:9292/[^] to verify that there is a new entry. Note there is no
 timestamp in the last verified column as the pact is yet to be verified by the `system` microservice.
 
-image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=275, align="left"]
+image::pact-broker-webpage-refresh.png[Pact broker application, align="left"]
 
 You can see detailed insights about each interaction by navigating to the http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] URL.
 
 A snippet of the webpage looks similar to:
 
-image::pact-broker-interactions.png[Pact broker application, width=550, height=450, align="left"]
+image::pact-broker-interactions.png[Pact broker application, align="left"]
 
 == Implementing pact test in the system service
 
@@ -313,7 +301,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 ```
 When completed, refresh the pact broker webpage at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
 
-image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=325, align="left"]
+image::pact-broker-webpage-verified.png[Pact broker application, align="left"]
 
 The pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the pact broker application.
 This ensures that responses from the `system` microservice meet the expectations of the `inventory` microservice.
