@@ -47,11 +47,7 @@ Contract testing bridges the gap among the shortcomings of those testing methodo
 HTTP requests and responses it transmits conform to a shared understanding that is documented in a contract.
 It ensures that microservices can communicate with each other.
 
-*Pact*
-
 https://docs.pact.io/[Pact^] is an open source contract testing tool for testing HTTP requests, responses and, message integrations by using contract tests.
-
-*Pact broker*
 
 The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into CI/CD pipelines.
 
@@ -115,7 +111,7 @@ include::finish/inventory/pom.xml[]
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the InventoryPactIT.java file.#
-`src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
+`inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
 ----
 
 The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`PactProviderRule` mock provider that mimics the HTTP responses from the `system` microservice.
@@ -180,7 +176,19 @@ The generated pact file is named `Inventory-System.json` and is located in `inve
           {
             "os.encoding": "UTF-8"
           }
-        ]
+        ],
+        "matchingRules": {
+          "body": {
+            "$[0]['os.encoding']": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
       },
       "providerStates": [
         {
@@ -193,7 +201,7 @@ The generated pact file is named `Inventory-System.json` and is located in `inve
 }
 ----
 
-Open a new command-line session and navigate to the `start/inventory` directory to publish the generated pact file to the pact broker by using:
+Open a new command-line session and navigate to the `start/inventory` directory. Publish the generated pact file to the pact broker by running the following command:
 [role='command']
 ```
 mvn pact:publish
@@ -208,14 +216,14 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 
 == Verifying the pact in pact broker
 
-Refresh the pact broker URL at http://localhost:9292/[^] to verify that there is a new entry. Note there is no
+Refresh the pact broker webpage at http://localhost:9292/[^] to verify that there is a new entry. Note there is no
 timestamp in the last verified column as the pact is yet to be verified by the `system` microservice.
 
 image::pact-broker-webpage-refresh.png[Pact broker application, width=550, height=275, align="left"]
 
-You can also see the interactions URL at http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] for more insights about each interaction.
+You can see detailed insights about each interaction by navigating to the http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] URL.
 
-A snippet of the interaction page looks similar to:
+A snippet of the webpage looks similar to:
 
 image::pact-broker-interactions.png[Pact broker application, width=550, height=450, align="left"]
 
@@ -258,7 +266,7 @@ After you see the following message, your application server in dev mode is read
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the SystemBrokerIT.java file.#
-`src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
+`system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
 ----
 
 The connection information for the pact broker is provided with the [hotspot=connectionInfo file=0]`@PactBroker` annotation. The dependency also provides a JUnit5 Invocation Context Provider by the [hotspot=invocation file=0]`pactVerificationTestTemplate` method to generate a test for each of the interactions.
@@ -282,7 +290,7 @@ After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open 
 
 == Verifying the contract
 
-In the command-line session where the system microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn test` goal can be used instead to verify the pact file from the pact broker.
+In the command-line session where the `system` microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn test` goal can be used instead to verify the pact file from the pact broker.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
@@ -303,7 +311,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
 ...
 ```
-When completed, refresh the pact broker URL at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
+When completed, refresh the pact broker webpage at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
 
 image::pact-broker-webpage-verified.png[Pact broker application, width=550, height=325, align="left"]
 
@@ -315,7 +323,7 @@ This ensures that responses from the `system` microservice meet the expectations
 When you are done checking out the service, exit dev mode by pressing `CTRL+C` in the command-line sessions
 where you ran the servers for `system` and `inventory`, or by typing `q` and then pressing the `enter/return` key.
 
-Navigate back to `/guide-contract-testing` directory and run the following commands to remove the pact broker application.
+Navigate back to the `/guide-contract-testing` directory and run the following commands to remove the pact broker application.
 [role='command']
 ```
 docker-compose -f "pact-broker/docker-compose.yml" down
