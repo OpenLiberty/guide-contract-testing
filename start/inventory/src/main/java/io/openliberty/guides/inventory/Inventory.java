@@ -24,9 +24,9 @@ public class Inventory {
         this.url = url;
     }
 
-    public String getEncoding() {
+    public String getServerName() {
         Client client = ClientBuilder.newClient();
-        Response response = client.target(url + "/system/properties/key/os.encoding").request().get();
+        Response response = client.target(url + "/system/properties/key/wlp.server.name").request().get();
         String result = response.readEntity(String.class);
         response.close();
         client.close();
