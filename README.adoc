@@ -152,7 +152,7 @@ When completed, you will see a similar output to the following example:
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
 ```
 
-When integrating the pact framework in a CI/CD build pipeline, the `mvn verify` goal can be used instead to generate the pact file.
+When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to generate the pact file.
 
 The generated pact file is named `Inventory-System.json` and is located in `inventory/target/pacts`. It contains the defined interactions in `.json` format:
 
@@ -278,7 +278,7 @@ After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open 
 
 == Verifying the contract
 
-In the command-line session where the `system` microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn test` goal can be used instead to verify the pact file from the pact broker.
+In the command-line session where the `system` microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to verify the pact file from the pact broker.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
