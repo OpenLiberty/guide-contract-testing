@@ -2,7 +2,7 @@ name: Test Application
 
 on:
   pull_request:
-    branches: [ draft ]
+    branches: [ qa ]
 
 jobs:
   needTest:
