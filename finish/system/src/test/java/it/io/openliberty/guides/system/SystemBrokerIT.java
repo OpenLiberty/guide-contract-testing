@@ -60,9 +60,9 @@ public class SystemBrokerIT {
   }
 
   // tag::state[]
-  @State("os.encoding is UTF-8")
+  @State("wlp.server.name is defaultServer")
   // end::state[]
-  public void validEncoding() {
+  public void validServerName() {
   }
 
   @State("Default directory is true")
