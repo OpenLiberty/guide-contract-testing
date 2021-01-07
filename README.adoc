@@ -9,7 +9,7 @@
 :projectid: contract-testing
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2020-12-22
+:page-releasedate: 2021-01-07
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
