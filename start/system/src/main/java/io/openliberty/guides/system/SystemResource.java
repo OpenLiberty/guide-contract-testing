@@ -46,7 +46,7 @@ public class SystemResource {
 		try{
 			JsonArray response = Json.createArrayBuilder()
 					.add(Json.createObjectBuilder()
-							.add(key, System.getProperties().get(key).toString()))
+					.add(key, System.getProperties().get(key).toString()))
 					.build();
 			return Response.ok(response, MediaType.APPLICATION_JSON).build();
 		} catch (java.lang.NullPointerException exception) {
@@ -62,7 +62,7 @@ public class SystemResource {
 
 		JsonArray response = Json.createArrayBuilder()
 				.add(Json.createObjectBuilder()
-						.add("system.properties.version", "1.1"))
+				.add("system.properties.version", "1.1"))
 				.build();
 		return response;
 	}

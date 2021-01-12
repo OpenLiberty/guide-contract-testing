@@ -145,11 +145,11 @@ When completed, you will see a similar output to the following example:
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running io.openliberty.guides.inventory.InventoryPactIT
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.631 s - in io.openliberty.guides.inventory.InventoryPactIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.631 s - in io.openliberty.guides.inventory.InventoryPactIT
 [INFO]
 [INFO] Results:
 [INFO]
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ```
 
 When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to generate the pact file.
@@ -309,7 +309,7 @@ The test from the `system` microservice fails as the `inventory` microservice wa
 #Replace the SystemResource.java file.#
 `system/src/main/java/io/openliberty/guides/system/SystemResource.java`
 ----
-With the `/version` endpoint corrected to return a [hotspot=decimal file=0]`decimal type`, press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
+With the [hotspot=decimal file=0]`/version` endpoint corrected to return a decimal type, press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
