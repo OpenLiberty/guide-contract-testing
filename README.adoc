@@ -327,7 +327,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
       has status code 200 (OK)
       has a matching body (OK)
 [main] INFO au.com.dius.pact.provider.DefaultVerificationReporter - Published verification result of 'au.com.dius.pact.core.pactbroker.TestResult$Ok@4d84dfe7' for consumer 'Consumer(name=Inventory)'
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
 ...
 ```
 When completed, refresh the pact broker webpage at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
