@@ -50,4 +50,13 @@ public class Inventory {
         client.close();
         return result;
     }
+
+    public String getInvalidProperty() {
+        Client client = ClientBuilder.newClient();
+        Response response = client.target(url + "/system/properties/invalidProperty").request().get();
+        String result = response.readEntity(String.class);
+        response.close();
+        client.close();
+        return result;
+    }
 }

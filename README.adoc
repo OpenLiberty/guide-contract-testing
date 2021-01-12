@@ -153,6 +153,7 @@ When completed, you will see a similar output to the following example:
 ```
 
 When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to generate the pact file.
+The maven failsafe plugin provides a lifecycle phase for running integration tests that runs after unit tests. By default, it looks for classes suffixed with "IT" (Integration Test). You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plugin^] documentation for more information.
 
 The generated pact file is named `Inventory-System.json` and is located in `inventory/target/pacts`. It contains the defined interactions in `.json` format:
 
@@ -279,6 +280,36 @@ After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open 
 == Verifying the contract
 
 In the command-line session where the `system` microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to verify the pact file from the pact broker.
+
+The tests will fail with:
+[role="no_copy"]
+```
+[ERROR] Failures:
+[ERROR]   SystemBrokerIT.pactVerificationTestTemplate:44
+Failures:
+
+1) Verifying a pact between Inventory and System - a request for the version
+
+    1.1) BodyMismatch: $.0.system.properties.version BodyMismatch: $.0.system.properties.version Expected "1.1" (String) to be a decimal number
+
+
+[INFO]
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
+```
+SystemResource.java
+[source, java, linenums, role="code_column hide_tags=copyright"]
+----
+include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource.java[]
+----
+
+The test from the `system` microservice fails as the `inventory` microservice was expecting a decimal, `1.1` for the `/version` endpoint but instead received a string, `"1.1"`.
+
+[role="code_command hotspot file=0", subs="quotes"]
+----
+#Replace the SystemResource.java file.#
+`system/src/main/java/io/openliberty/guides/system/SystemResource.java`
+----
+With the `/version` endpoint corrected to return a [hotspot=decimal file=0]`decimal type`, press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]

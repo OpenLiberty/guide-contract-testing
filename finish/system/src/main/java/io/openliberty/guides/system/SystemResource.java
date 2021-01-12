@@ -41,13 +41,18 @@ public class SystemResource {
 	@GET
 	@Path("/key/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JsonArray getPropertiesByKey(@PathParam("key") String key) {
+	public Response getPropertiesByKey(@PathParam("key") String key) {
 
-		JsonArray response = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-						.add(key, System.getProperties().get(key).toString()))
-				.build();
-		return response;
+		try{
+			JsonArray response = Json.createArrayBuilder()
+					.add(Json.createObjectBuilder()
+							.add(key, System.getProperties().get(key).toString()))
+					.build();
+			return Response.ok(response, MediaType.APPLICATION_JSON).build();
+		} catch (java.lang.NullPointerException exception) {
+			return Response.status(Response.Status.NOT_FOUND)
+					.build();
+		}
 	}
 
 	@GET
@@ -57,7 +62,9 @@ public class SystemResource {
 
 		JsonArray response = Json.createArrayBuilder()
 				.add(Json.createObjectBuilder()
+						// tag::decimal[]
 						.add("system.properties.version", 1.1))
+						// end::decimal[]
 				.build();
 		return response;
 	}

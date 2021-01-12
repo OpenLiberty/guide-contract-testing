@@ -92,6 +92,19 @@ public class InventoryPactIT {
                 .toPact();
     }
 
+    @Pact(consumer = "Inventory")
+    public RequestResponsePact createPactInvalid(PactDslWithProvider builder) {
+
+        return builder
+                .given("invalid property")
+                .uponReceiving("a request with an invalid property")
+                .path("/system/properties/invalidProperty")
+                .method("GET")
+                .willRespondWith()
+                .status(404)
+                .toPact();
+    }
+
     @Test
     // tag::verification[]
     @PactVerification(value = "System", fragment = "createPactServer")
@@ -120,5 +133,13 @@ public class InventoryPactIT {
         String version = new Inventory(mockProvider.getUrl()).getVersion();
         assertEquals("Expected version does not match",
                      "[{\"system.properties.version\":1.1}]", version);
+    }
+
+    @Test
+    @PactVerification(value = "System", fragment = "createPactInvalid")
+    public void runInvalidTest() {
+        String invalid = new Inventory(mockProvider.getUrl()).getInvalidProperty();
+        assertEquals("Expected invalid property response does not match",
+                "", invalid);
     }
 }

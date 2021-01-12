@@ -72,4 +72,8 @@ public class SystemBrokerIT {
   @State("version is 1.1")
   public void validVersion() {
   }
+
+  @State("invalid property")
+  public void invalidProperty() {
+  }
 }
