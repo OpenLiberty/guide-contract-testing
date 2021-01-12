@@ -46,14 +46,14 @@ public class SystemResource {
 		try {
 
 			JsonArray response = Json.createArrayBuilder()
-					.add(Json.createObjectBuilder()
-					.add(key, System.getProperties().get(key).toString()))
-					.build();
+				.add(Json.createObjectBuilder()
+				.add(key, System.getProperties().get(key).toString()))
+				.build();
 			return Response.ok(response, MediaType.APPLICATION_JSON).build();
 		} catch (java.lang.NullPointerException exception) {
 
 			return Response.status(Response.Status.NOT_FOUND)
-					.build();
+				.build();
 		}
 	}
 
