@@ -67,7 +67,8 @@ public class SystemResource {
   public JsonObject getVersion() {
 
     // tag::decimal[]
-    JsonObject response = Json.createObjectBuilder().add("system.properties.version", 1.1).build();
+    JsonObject response = Json.createObjectBuilder().add("system.properties.version", 1.1)
+      .build();
     // end::decimal[]
     return response;
   }
