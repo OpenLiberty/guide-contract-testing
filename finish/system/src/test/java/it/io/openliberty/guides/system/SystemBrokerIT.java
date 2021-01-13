@@ -29,11 +29,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Consumer("Inventory")
 // tag::connectionInfo[]
 @PactBroker(
-        host = "localhost",
-        port = "9292",
-        consumerVersionSelectors = {
-                @VersionSelector(tag = "open-liberty-pact")
-        })
+  host = "localhost",
+  port = "9292",
+  consumerVersionSelectors = {
+    @VersionSelector(tag = "open-liberty-pact")
+  })
 // end::connectionInfo[]
 public class SystemBrokerIT {
   // tag::invocation[]
@@ -71,5 +71,9 @@ public class SystemBrokerIT {
 
   @State("version is 1.1")
   public void validVersion() {
+  }
+
+  @State("invalid property")
+  public void invalidProperty() {
   }
 }

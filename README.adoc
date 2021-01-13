@@ -9,7 +9,7 @@
 :projectid: contract-testing
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2020-12-22
+:page-releasedate: 2021-01-07
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
@@ -49,7 +49,7 @@ It ensures that microservices can communicate with each other.
 
 https://docs.pact.io/[Pact^] is an open source contract testing tool for testing HTTP requests, responses and, message integrations by using contract tests.
 
-The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into CI/CD pipelines.
+The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into continuous integration (CI) and continuous delivery (CD) pipelines.
 
 The two microservices you will interact with are called `system` and `inventory`. The `system` microservice returns the JVM
 system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice. You will
@@ -110,7 +110,7 @@ include::finish/inventory/pom.xml[]
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Create the InventoryPactIT.java file.#
+#Create the InventoryPactIT class file.#
 `inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
 ----
 
@@ -125,7 +125,7 @@ Finally, the [hotspot=unitTest file=0]`assertEquals()` confirms that the respons
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
-#Replace the inventory pom file.#
+#Replace the inventory maven project file.#
 `inventory/pom.xml`
 ----
 
@@ -145,14 +145,15 @@ When completed, you will see a similar output to the following example:
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running io.openliberty.guides.inventory.InventoryPactIT
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.631 s - in io.openliberty.guides.inventory.InventoryPactIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.631 s - in io.openliberty.guides.inventory.InventoryPactIT
 [INFO]
 [INFO] Results:
 [INFO]
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ```
 
 When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to generate the pact file.
+The maven failsafe plugin provides a lifecycle phase for running integration tests that runs after unit tests. By default, it looks for classes suffixed with "IT" (Integration Test). You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plugin^] documentation for more information.
 
 The generated pact file is named `Inventory-System.json` and is located in `inventory/target/pacts`. It contains the defined interactions in `.json` format:
 
@@ -253,7 +254,7 @@ After you see the following message, your application server in dev mode is read
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Create the SystemBrokerIT.java file.#
+#Create the SystemBrokerIT class file.#
 `system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
 ----
 
@@ -267,7 +268,7 @@ The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
-#Replace the system pom file.#
+#Replace the system maven project file.#
 `system/pom.xml`
 ----
 
@@ -279,6 +280,37 @@ After you create the `SystemBrokerIT.java` and replace the `pom.xml` file, Open 
 == Verifying the contract
 
 In the command-line session where the `system` microservice was started, press the `enter/return` key to run the tests to verify the pact file. When integrating the pact framework in a CI/CD build pipeline, the `mvn failsafe:integration-test` goal can be used instead to verify the pact file from the pact broker.
+
+The tests will fail with:
+[role="no_copy"]
+```
+[ERROR] Failures:
+[ERROR]   SystemBrokerIT.pactVerificationTestTemplate:44
+Failures:
+
+1) Verifying a pact between Inventory and System - a request for the version
+
+    1.1) BodyMismatch: $.0.system.properties.version BodyMismatch: $.0.system.properties.version Expected "1.1" (String) to be a decimal number
+
+
+[INFO]
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
+```
+SystemResource.java
+[source, java, linenums, role="code_column hide_tags=copyright"]
+----
+include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource.java[]
+----
+
+The test from the `system` microservice fails as the `inventory` microservice was expecting a decimal, `1.1` for the `system.properties.version` value but instead received a string, `"1.1"`.
+
+Correct the [hotspot=decimal file=0]`system.properties.version` value to decimal.
+[role="code_command hotspot file=0", subs="quotes"]
+----
+#Replace the SystemResource class file.#
+`system/src/main/java/io/openliberty/guides/system/SystemResource.java`
+----
+Press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
@@ -296,7 +328,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
       has status code 200 (OK)
       has a matching body (OK)
 [main] INFO au.com.dius.pact.provider.DefaultVerificationReporter - Published verification result of 'au.com.dius.pact.core.pactbroker.TestResult$Ok@4d84dfe7' for consumer 'Consumer(name=Inventory)'
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.835 s - in it.io.openliberty.guides.system.SystemBrokerIT
 ...
 ```
 When completed, refresh the pact broker webpage at http://localhost:9292/[^] to confirm that there is now a timestamp in the last verified column.
