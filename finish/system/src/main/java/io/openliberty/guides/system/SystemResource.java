@@ -39,7 +39,6 @@ public class SystemResource {
     description = "Number of times the JVM system properties are requested")
 
   public Response getProperties() {
-
     return Response.ok(System.getProperties()).build();
   }
 
@@ -47,17 +46,14 @@ public class SystemResource {
   @Path("/key/{key}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPropertiesByKey(@PathParam("key") String key) {
-
     try {
-
       JsonArray response = Json.createArrayBuilder()
         .add(Json.createObjectBuilder()
           .add(key, System.getProperties().get(key).toString()))
         .build();
       return Response.ok(response, MediaType.APPLICATION_JSON).build();
     } catch (java.lang.NullPointerException exception) {
-
-      return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
 
@@ -65,7 +61,6 @@ public class SystemResource {
   @Path("/version")
   @Produces(MediaType.APPLICATION_JSON)
   public JsonObject getVersion() {
-
     // tag::decimal[]
     JsonObject response = Json.createObjectBuilder().add("system.properties.version", 1.1)
       .build();

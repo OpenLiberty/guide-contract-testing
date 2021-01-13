@@ -110,7 +110,7 @@ include::finish/inventory/pom.xml[]
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Create the InventoryPactIT class.#
+#Create the InventoryPactIT class file.#
 `inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
 ----
 
@@ -254,7 +254,7 @@ After you see the following message, your application server in dev mode is read
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Create the SystemBrokerIT class.#
+#Create the SystemBrokerIT class file.#
 `system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
 ----
 
@@ -304,12 +304,13 @@ include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource
 
 The test from the `system` microservice fails as the `inventory` microservice was expecting a decimal, `1.1` for the `system.properties.version` value but instead received a string, `"1.1"`.
 
-Correct the [hotspot=decimal file=0]`system.properties.version` value to decimal and press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
+Correct the [hotspot=decimal file=0]`system.properties.version` value to decimal.
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Replace the SystemResource class file.#
 `system/src/main/java/io/openliberty/guides/system/SystemResource.java`
 ----
+Press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]
