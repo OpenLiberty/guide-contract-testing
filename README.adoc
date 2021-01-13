@@ -49,7 +49,7 @@ It ensures that microservices can communicate with each other.
 
 https://docs.pact.io/[Pact^] is an open source contract testing tool for testing HTTP requests, responses and, message integrations by using contract tests.
 
-The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into CI/CD pipelines.
+The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into continuous integration (CI) and continuous delivery (CD) pipelines.
 
 The two microservices you will interact with are called `system` and `inventory`. The `system` microservice returns the JVM
 system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice. You will
@@ -302,14 +302,14 @@ SystemResource.java
 include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource.java[]
 ----
 
-The test from the `system` microservice fails as the `inventory` microservice was expecting a decimal, `1.1` for the `/version` endpoint but instead received a string, `"1.1"`.
+The test from the `system` microservice fails as the `inventory` microservice was expecting a decimal, `1.1` for the `system.properties.version` value but instead received a string, `"1.1"`.
 
+Correct the [hotspot=decimal file=0]`system.properties.version` value to decimal and press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 [role="code_command hotspot file=0", subs="quotes"]
 ----
-#Replace the SystemResource.java file.#
+#Replace the SystemResource class file.#
 `system/src/main/java/io/openliberty/guides/system/SystemResource.java`
 ----
-With the [hotspot=decimal file=0]`/version` endpoint corrected to return a decimal type, press the `enter/return` key to re-run the tests in the command-line session where the `system` microservice was started.
 
 If successful, you will see a similar output to the following example:
 [role="no_copy"]

@@ -14,6 +14,7 @@ package io.openliberty.guides.system;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonObject;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
@@ -30,45 +31,44 @@ import org.eclipse.microprofile.metrics.annotation.Timed;
 @Path("/properties")
 public class SystemResource {
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Timed(name = "getPropertiesTime", description = "Time needed to get the JVM system properties")
-	@Counted(absolute = true, description = "Number of times the JVM system properties are requested")
-	public Response getProperties() {
-		return Response.ok(System.getProperties()).build();
-	}
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Timed(name = "getPropertiesTime",
+    description = "Time needed to get the JVM system properties")
+  @Counted(absolute = true,
+    description = "Number of times the JVM system properties are requested")
 
-	@GET
-	@Path("/key/{key}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPropertiesByKey(@PathParam("key") String key) {
+  public Response getProperties() {
 
-		try {
+    return Response.ok(System.getProperties()).build();
+  }
 
-			JsonArray response = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-				.add(key, System.getProperties().get(key).toString()))
-				.build();
-			return Response.ok(response, MediaType.APPLICATION_JSON).build();
-		} catch (java.lang.NullPointerException exception) {
+  @GET
+  @Path("/key/{key}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getPropertiesByKey(@PathParam("key") String key) {
 
-			return Response.status(Response.Status.NOT_FOUND)
-				.build();
-		}
-	}
+    try {
 
-	@GET
-	@Path("/version")
-	@Produces(MediaType.APPLICATION_JSON)
-	public JsonArray getVersion() {
+      JsonArray response = Json.createArrayBuilder()
+        .add(Json.createObjectBuilder()
+          .add(key, System.getProperties().get(key).toString()))
+        .build();
+      return Response.ok(response, MediaType.APPLICATION_JSON).build();
+    } catch (java.lang.NullPointerException exception) {
 
-		JsonArray response = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-				// tag::decimal[]
-				.add("system.properties.version", 1.1))
-				// end::decimal[]
-				.build();
-		return response;
-	}
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
+  }
 
+  @GET
+  @Path("/version")
+  @Produces(MediaType.APPLICATION_JSON)
+  public JsonObject getVersion() {
+
+    // tag::decimal[]
+    JsonObject response = Json.createObjectBuilder().add("system.properties.version", 1.1).build();
+    // end::decimal[]
+    return response;
+  }
 }
