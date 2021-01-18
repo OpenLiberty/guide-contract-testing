@@ -1,4 +1,4 @@
-// Copyright (c) 2018, 2020 IBM Corporation and others.
+// Copyright (c) 2021 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -9,7 +9,7 @@
 :projectid: contract-testing
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2021-01-07
+:page-releasedate: 2021-01-18
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
@@ -41,7 +41,7 @@ Integration tests address this issue by testing against real running services. H
 Usually, end-to-end tests tend to be more trustworthy as they verify functionality from the perspective of a user. A GUI component
 is required to perform end-to-end tests that rely on third-party software such as Selenium that requires heavy compute time and resources.
 
-*Contract testing*
+*What is contract testing?*
 
 Contract testing bridges the gap among the shortcomings of those testing methodologies. Contract testing is a technique for testing an integration point by isolating each microservice and checking if the
 HTTP requests and responses it transmits conform to a shared understanding that is documented in a contract.
@@ -52,8 +52,9 @@ https://docs.pact.io/[Pact^] is an open source contract testing tool for testing
 The https://docs.pact.io/pact_broker/docker_images[pact broker^] is an application for sharing pact contracts and verification results, and is an important piece for integrating pact into continuous integration (CI) and continuous delivery (CD) pipelines.
 
 The two microservices you will interact with are called `system` and `inventory`. The `system` microservice returns the JVM
-system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice. You will
-learn how to use the https://docs.pact.io/[Pact^] framework to write contract tests for the `inventory` microservice to be verified by
+system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice.
+
+You will learn how to use the https://docs.pact.io/[Pact^] framework to write contract tests for the `inventory` microservice to be verified by
 the `system` microservice.
 
 == Additional prerequisites
