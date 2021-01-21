@@ -54,8 +54,8 @@ The https://docs.pact.io/pact_broker/docker_images[Pact Broker^] is an applicati
 The two microservices you will interact with are called `system` and `inventory`. The `system` microservice returns the JVM
 system properties of its host. The `inventory` microservice retrieves specific properties from the `system` microservice.
 
-You will learn how to use the Pact framework to write contract tests for the `inventory` microservice to be verified by
-the `system` microservice.
+
+You will learn how to use the Pact framework to write contract tests for the `inventory` microservice to be verified by the `system` microservice.
 
 == Additional prerequisites
 
