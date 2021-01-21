@@ -221,6 +221,7 @@ timestamp in the last verified column as the Pact is yet to be verified by the `
 
 image::pact-broker-webpage-refresh.png[Pact broker, align="left"]
 
+{empty} +
 
 You can see detailed insights about each interaction by navigating to the http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] URL.
 
@@ -348,6 +349,7 @@ When completed, refresh the Pact Broker webpage at http://localhost:9292/[^] to 
 
 image::pact-broker-webpage-verified.png[Pact broker, align="left"]
 
+{empty} +
 
 The Pact file that is created by the `inventory` microservice was successfully verified by the `system` microservice through the Pact Broker.
 This ensures that responses from the `system` microservice meet the expectations of the `inventory` microservice.
