@@ -92,11 +92,9 @@ Creating pact-broker_postgres_1 ... done
 Creating pact-broker_pact-broker_1 ... done
 ```
 
-+
-
 Go to the http://localhost:9292/[^] URL to confirm that you can access the Pact Broker’s UI, as shown in the following image:
 
-image::pact-broker-webpage.png[Pact broker, align="left"]
+image::pact-broker-webpage.png[Pact broker, align="left"] +
 
 
 You can refer to the official https://docs.pact.io/pact_broker/docker_images/pactfoundation[Pact Broker^]
