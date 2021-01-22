@@ -33,7 +33,6 @@ public class InventoryPactIT {
   // tag::mockprovider[]
   @Rule
   public PactProviderRule mockProvider = new PactProviderRule("System", this);
-
   // end::mockprovider[]
   // tag::pact[]
   @Pact(consumer = "Inventory")
@@ -57,7 +56,6 @@ public class InventoryPactIT {
         .stringValue("wlp.server.name", "defaultServer"))
       .toPact();
   }
-
   // end::builder[]
   @Pact(consumer = "Inventory")
   public RequestResponsePact createPactEdition(PactDslWithProvider builder) {
