@@ -9,7 +9,7 @@
 :projectid: contract-testing
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2021-01-18
+:page-releasedate: 2021-01-25
 :page-guide-category: microprofile
 :page-essential: false
 :page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
@@ -92,7 +92,7 @@ Creating pact-broker_pact-broker_1 ... done
 
 Go to the http://localhost:9292/[^] URL to confirm that you can access the user interface (UI) of the Pact Broker, as shown in the following image:
 
-image::pact-broker-webpage.png[Pact Broker, align="left"]
+image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
 
 {empty} +
 
@@ -217,13 +217,13 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 Refresh the Pact Broker webpage at the http://localhost:9292/[^] URL to verify that a new entry exists. There isn't yet a
 timestamp in the last verified column because the pact hasn't been verified by the `system` microservice.
 
-image::pact-broker-webpage-refresh.png[Pact Broker, align="left"]
+image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry, align="left"]
 
 {empty} +
 
 You can see detailed insights about each interaction by going to the http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] URL, as shown in the following image:
 
-image::pact-broker-interactions.png[Pact Broker, align="left"]
+image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align="left"]
 
 == Implementing pact testing in the system service
 
@@ -344,7 +344,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 ```
 After the tests are complete, refresh the Pact Broker webpage at the http://localhost:9292/[^] URL to confirm that there's now a timestamp in the last verified column:
 
-image::pact-broker-webpage-verified.png[Pact Broker, align="left"]
+image::pact-broker-webpage-verified.png[Pact Broker webpage for verified, align="left"]
 
 {empty} +
 
