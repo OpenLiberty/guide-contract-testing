@@ -16,7 +16,7 @@
 :page-seo-title: Implementing consumer-driven contract testing for Java microservices and Cloud-native applications.
 :page-seo-description: A getting started tutorial on implementing consumer-driven contract testing for Java microservices and Cloud-native applications.
 :guide-author: Open Liberty
-:page-tags: ['MicroProfile', 'Java EE', 'Jakarta EE', 'Contract Testing', 'Consumer-Driven Test']
+:page-tags: ['MicroProfile', 'Jakarta EE']
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
 :page-permalink: /guides/{projectid}
 :repo-description: Visit the https://openliberty.io/guides/{projectid}.html[website] for the rendered version of the guide.
