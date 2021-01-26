@@ -12,9 +12,9 @@
 :page-releasedate: 2021-01-25
 :page-guide-category: microprofile
 :page-essential: false
-:page-description: Learn how to implement contract testing to ensure compatibility for Java microservices and Cloud-native applications.
-:page-seo-title: Implementing consumer-driven contract testing for Java microservices and Cloud-native applications.
-:page-seo-description: A getting started tutorial on implementing consumer-driven contract testing for Java microservices and Cloud-native applications.
+:page-description: Learn how to implement contract testing to ensure compatibility for Java microservices.
+:page-seo-title: Implement consumer-driven contract testing for Java microservices using the Pact framework
+:page-seo-description: A getting started tutorial with examples on how to implement consumer-driven contract testing using the Pact framework for Java microservices and cloud-native applications written using MicroProfile and Jakarta EE API.
 :guide-author: Open Liberty
 :page-tags: ['MicroProfile', 'Jakarta EE']
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
@@ -38,7 +38,7 @@ While unit tests are fast, they are less trustworthy because they run in isolati
 
 Integration tests address this issue by testing against real running services. However, they tend to be slow as the tests depend on other microservices and are less reliable because they are prone to external changes.
 
-Usually, end-to-end tests are more trustworthy because they verify functionality from the perspective of a user. However, a graphical user interface (GUI) component is required to perform end-to-end tests, and GUI components rely on third-party software, such as Selenium, which requires heavy computation time and resources.
+Usually, end-to-end tests are more trustworthy because they verify functionality from the perspective of a user. However, a graphical user interface (GUI) component is often required to perform end-to-end tests, and GUI components rely on third-party software, such as Selenium, which requires heavy computation time and resources.
 
 *What is contract testing?*
 
@@ -137,7 +137,7 @@ Finally, the [hotspot=unitTest file=0]`assertEquals()` method confirms that the 
 `inventory/pom.xml`
 ----
 
-The Pact framework provides a [hotspot=pactPlugin file=1]`maven` extension that can be added to the build section of the `pom.xml` file.
+The Pact framework provides a [hotspot=pactPlugin file=1]`Maven` plugin that can be added to the build section of the `pom.xml` file.
 The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file.
 The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
 
@@ -367,7 +367,7 @@ docker volume rm pact-broker_postgres-volume
 
 == Great work! You're done!
 
-You implemented contract testing in microservices by using Pact and verified the contract with the Pact Broker.
+You implemented contract testing in Java microservices by using Pact and verified the contract with the Pact Broker.
 
 == Related Links
 
