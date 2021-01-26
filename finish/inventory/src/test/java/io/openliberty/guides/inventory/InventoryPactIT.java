@@ -34,6 +34,7 @@ public class InventoryPactIT {
   @Rule
   public PactProviderRule mockProvider = new PactProviderRule("System", this);
   // end::mockprovider[]
+
   // tag::pact[]
   @Pact(consumer = "Inventory")
   // end::pact[]
@@ -57,6 +58,7 @@ public class InventoryPactIT {
       .toPact();
   }
   // end::builder[]
+
   @Pact(consumer = "Inventory")
   public RequestResponsePact createPactEdition(PactDslWithProvider builder) {
     Map<String, String> headers = new HashMap<String, String>();
