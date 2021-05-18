@@ -13,7 +13,10 @@ docker-compose -f "pact-broker/docker-compose.yml" up -d --build
 #       liberty:install-feature   - Install a feature packaged as a Subsystem Archive (esa) to the Liberty runtime.
 #       liberty:deploy            - Copy applications to the Liberty server's dropins or apps directory.
 cd finish/inventory
-mvn -q clean package liberty:create liberty:install-feature liberty:deploy
+mvn -Dhttp.keepAlive=false \
+    -Dmaven.wagon.http.pool=false \
+    -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 \
+    -q clean package liberty:create liberty:install-feature liberty:deploy
 
 ## Run the integration and publish goal for inventory service
 # These commands are separated because if one of the commands fail, the test script will fail and exit.
@@ -28,7 +31,10 @@ mvn pact:publish
 
 ## Build the system service
 cd ../system
-mvn -q clean package liberty:create liberty:install-feature liberty:deploy
+mvn -Dhttp.keepAlive=false \
+    -Dmaven.wagon.http.pool=false \
+    -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 \
+    -q clean package liberty:create liberty:install-feature liberty:deploy
 
 ## Run the integration and publish goal for system service
 mvn liberty:start

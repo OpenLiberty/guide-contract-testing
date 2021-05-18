@@ -22,7 +22,7 @@
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>3.3</version>
+            <version>4.0.1</version>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.3.6</version>
+            <version>3.4.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -60,7 +60,7 @@
             <plugin>
                 <groupId>au.com.dius.pact.provider</groupId>
                 <artifactId>maven</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.4</version>
                 <configuration>
                     <serviceProviders>
                         // tag::serviceProvider[]
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
+                <version>3.3.1</version>
             </plugin>
             <!-- Plugin to run functional tests -->
             <plugin>
@@ -105,7 +105,7 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.3.4</version>
             </plugin>
         </plugins>
     </build>
