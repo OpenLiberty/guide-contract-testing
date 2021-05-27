@@ -3,9 +3,6 @@ set -euxo pipefail
 
 # LMP 3.0+ goals are listed here: https://github.com/OpenLiberty/ci.maven#goals
 
-mvn --version 
-java --version
-
 # Start Pact Broker
 cd ..
 docker-compose -f "pact-broker/docker-compose.yml" up -d --build
