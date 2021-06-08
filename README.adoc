@@ -151,7 +151,8 @@ The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice a
 which makes it easier to differentiate microservices from each other when you have multiple applications.
 
 The [hotspot=builder file=0]`createPactServer()` method defines the minimal expected response for a specific endpoint, which is known as an interaction.
-For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
+For each interaction, the expected request and the response are registered with the mock service by using the
+[hotspot=verification file=0]`@PactVerification` annotation.
 
 The test sends a real request with the [hotspot=mockTest file=0]`getUrl()` method of the mock provider.
 The mock provider compares the actual request with the expected request and confirms whether the comparison is successful.
@@ -248,17 +249,37 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 
 == Verifying the pact in the Pact Broker
 
+// Static guide instruction
+ifndef::cloud-hosted[]
 Refresh the Pact Broker webpage at the http://localhost:9292/[^] URL to verify that a new entry exists.
 There isn't yet a timestamp in the last verified column because the pact hasn't been verified
 by the `system` microservice.
+endif::[]
+
+// Cloud hosted guide instruction
+ifdef::cloud-hosted[]
+Refresh the Pact Broker at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
+where **accountname** is your account name.
+There isn't yet a timestamp in the last verified column because the pact hasn't been verified
+by the `system` microservice.
+endif::[]
 
 image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry, align="left"]
 
-{empty} +
-
+// Static guide instruction
+ifndef::cloud-hosted[]
 You can see detailed insights about each interaction by going to the
 http://localhost:9292/pacts/provider/System/consumer/Inventory/latest[^] URL,
 as shown in the following image:
+endif::[]
+
+// Cloud hosted guide instruction
+ifdef::cloud-hosted[]
+You can see detailed insights about each interaction by going to the
+**`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai/pacts/provider/System/consumer/Inventory/latest`** URL, 
+where **accountname** is your account name.
+It will appear similar to the following image:
+endif::[]
 
 image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align="left"]
 
