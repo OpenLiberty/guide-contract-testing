@@ -102,10 +102,7 @@ Creating pact-broker_pact-broker_1 ... done
 
 // Static guide instruction
 ifndef::cloud-hosted[]
-Go to the http://localhost:9292/[^] URL to confirm that you can access the user interface (UI) of the Pact Broker,
-as shown in the following image:
-
-image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
+Go to the http://localhost:9292/[^] URL to confirm that you can access the user interface (UI) of the Pact Broker.
 endif::[]
 
 // Cloud hosted guide instruction
@@ -116,6 +113,11 @@ Click the **OK** button.
 The Pact Broker can also be found at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name.
 endif::[]
+
+Confirm you can you use the user interface of the Pact Broker, as shown in the following image:
+The Pact Broker appears similarly to the following image:
+
+image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
 
 You can refer to the https://docs.pact.io/pact_broker/docker_images/pactfoundation[official Pact Broker documentation^]
 for more information about the components of the Docker Compose file.
