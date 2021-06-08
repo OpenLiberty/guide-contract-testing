@@ -90,11 +90,21 @@ Creating pact-broker_postgres_1 ... done
 Creating pact-broker_pact-broker_1 ... done
 ```
 
+// Static guide instruction
+ifndef::cloud-hosted[]
 Go to the http://localhost:9292/[^] URL to confirm that you can access the user interface (UI) of the Pact Broker, as shown in the following image:
 
 image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
+endif::[]
 
-{empty} +
+// Cloud hosted guide instruction
+ifdef::cloud-hosted[]
+Confirm the Pact Broker is working.
+Select **Launch Application** from the menu of the IDE and type **9292** to specify the port number for the Pact Broker service. 
+Click the **OK** button. 
+The Pact Broker can also be found at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
+where **accountname** is your account name.
+endif::[]
 
 You can refer to the https://docs.pact.io/pact_broker/docker_images/pactfoundation[official Pact Broker documentation^] for more information about the components of the Docker Compose file.
 
