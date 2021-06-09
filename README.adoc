@@ -71,19 +71,11 @@ You will deploy the Pact Broker in a Docker container.
 
 Start your Docker daemon before you proceed.
 
-== Getting started
-
-The fastest way to work through this guide is to clone the https://github.com/openliberty/guide-{projectid}.git[Git repository^] and use the projects that are provided inside:
-
-[source, role="command", subs="attributes"]
-----
-git clone https://github.com/openliberty/guide-{projectid}.git
-cd guide-{projectid}
-----
-
-The `start` directory contains the starting project that you will build upon.
-
-The `finish` directory contains the finished project that you will build.
+// =================================================================================================
+// Getting started
+// =================================================================================================
+[role='command']
+include::{common-includes}/gitclone.adoc[]
 
 === Starting the Pact Broker
 
