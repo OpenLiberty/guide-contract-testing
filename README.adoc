@@ -321,6 +321,8 @@ Correct the value of the [hotspot=decimal file=0]`system.properties.version` pro
 #Replace the SystemResource class file.#
 `system/src/main/java/io/openliberty/guides/system/SystemResource.java`
 ----
+
+
 Press the `enter/return` key to rerun the tests from the command-line session where you started the `system` microservice.
 
 If the tests are successful, you'll see a similar output to the following example:
