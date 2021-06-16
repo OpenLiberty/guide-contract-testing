@@ -237,7 +237,7 @@ mvn pact:publish
 After the file is published, you'll see a similar output to the following example:
 [role="no_copy"]
 ```
---- maven:4.1.0:publish (default-cli) @ inventory ---
+--- maven:4.1.21:publish (default-cli) @ inventory ---
 Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 ```
 
@@ -357,16 +357,16 @@ the `mvn failsafe:integration-test` goal can be used to verify the pact file fro
 The tests fail with the following errors:
 [role="no_copy"]
 ```
-[ERROR] Failures:
-[ERROR]   SystemBrokerIT.pactVerificationTestTemplate:44
+[ERROR] Failures: 
+[ERROR]   SystemBrokerIT.pactVerificationTestTemplate:28 Pact between Inventory (1.0-SNAPSHOT) and System - Upon a request for the version 
 Failures:
 
-1) Verifying a pact between Inventory and System - a request for the version
+1) Verifying a pact between Inventory and System - a request for the version has a matching body
 
-    1.1) BodyMismatch: $.0.system.properties.version BodyMismatch: $.0.system.properties.version Expected "1.1" (String) to be a decimal number
+    1.1) body: $.system.properties.version Expected "1.1" (String) to be a decimal number
 
 
-[INFO]
+[INFO] 
 [ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
 ```
 SystemResource.java
