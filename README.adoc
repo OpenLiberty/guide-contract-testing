@@ -106,10 +106,12 @@ The Pact Broker can also be found at the **`https://accountname-9292.theiadocker
 where **accountname** is your account name.
 endif::[]
 
-Confirm you can you use the user interface of the Pact Broker, as shown in the following image:
+Confirm you can use the user interface of the Pact Broker.
 The Pact Broker appears similarly to the following image:
 
 image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
+
+{empty} +
 
 You can refer to the https://docs.pact.io/pact_broker/docker_images/pactfoundation[official Pact Broker documentation^]
 for more information about the components of the Docker Compose file.
@@ -258,6 +260,8 @@ endif::[]
 
 image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry, align="left"]
 
+{empty} +
+
 // Static guide instruction
 ifndef::cloud-hosted[]
 You can see detailed insights about each interaction by going to the
@@ -321,7 +325,8 @@ The connection information for the Pact Broker is provided with the [hotspot=con
 The dependency also provides a JUnit5 Invocation Context Provider with the
 [hotspot=invocation file=0]`pactVerificationTestTemplate()` method to generate a test for each of the interactions.
 
-The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to `true` so that the results are sent to the Pact Broker after the tests are completed.
+The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to `true` so
+that the results are sent to the Pact Broker after the tests are completed.
 
 The test target is defined in the [hotspot=context file=0]`PactVerificationContext` context to point to the running endpoint of the `system` microservice.
 
@@ -416,6 +421,8 @@ Confirm that there's now a timestamp in the last verified column:
 endif::[]
 
 image::pact-broker-webpage-verified.png[Pact Broker webpage for verified, align="left"]
+
+{empty} +
 
 The pact file that's created by the `inventory` microservice was successfully verified by the `system` microservice through the Pact Broker.
 This ensures that responses from the `system` microservice meet the expectations of the `inventory` microservice.
