@@ -54,7 +54,7 @@ https://docs.pact.io/[Pact^] is an open source contract testing tool for testing
 HTTP requests, responses, and message integrations by using contract tests.
 
 The https://docs.pact.io/pact_broker/docker_images[Pact Broker^] is an application for sharing Pact contracts and verification results.
-The Pact Broker is also an important piece for integrating Pact into continuous integration (CI) and continuous delivery (CD) pipelines.
+The Pact Broker is also an important piece for integrating Pact into continuous integration and continuous delivery (CI/CD) pipelines.
 
 The two microservices you will interact with are called `system` and `inventory`.
 The `system` microservice returns the JVM system properties of its host.
@@ -65,7 +65,7 @@ that will then be verified by the `system` microservice.
 
 == Additional prerequisites
 
-Before you begin, Docker needs to be installed.
+Before you begin, you need to install Docker if it is not already installed.
 For installation instructions, refer to the https://docs.docker.com/get-docker/[official Docker documentation^].
 You will deploy the Pact Broker in a Docker container.
 
@@ -99,15 +99,15 @@ endif::[]
 
 // Cloud hosted guide instruction
 ifdef::cloud-hosted[]
-Confirm the Pact Broker is working.
+Confirm that the Pact Broker is working.
 Select **Launch Application** from the menu of the IDE and type **9292** to specify the port number for the Pact Broker service. 
 Click the **OK** button. 
 The Pact Broker can also be found at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name.
 endif::[]
 
-Confirm you can use the user interface of the Pact Broker.
-The Pact Broker appears similarly to the following image:
+Confirm that you can use the user interface of the Pact Broker.
+The Pact Broker interface is similar to the following image:
 
 image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
 
@@ -246,16 +246,14 @@ Publishing 'Inventory-System.json' with tags 'open-liberty-pact' ... OK
 // Static guide instruction
 ifndef::cloud-hosted[]
 Refresh the Pact Broker webpage at the http://localhost:9292/[^] URL to verify that a new entry exists.
-There isn't yet a timestamp in the last verified column because the pact hasn't been verified
-by the `system` microservice.
+The last verified column doesn't show a timestamp because the `system` microservice hasn't verified the pact yet.
 endif::[]
 
 // Cloud hosted guide instruction
 ifdef::cloud-hosted[]
 Refresh the Pact Broker at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name.
-There isn't yet a timestamp in the last verified column because the pact hasn't been verified
-by the `system` microservice.
+The last verified column doesn't show a timestamp because the `system` microservice hasn't verified the pact yet.
 endif::[]
 
 image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry, align="left"]
@@ -274,7 +272,7 @@ ifdef::cloud-hosted[]
 You can see detailed insights about each interaction by going to the
 **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai/pacts/provider/System/consumer/Inventory/latest`** URL, 
 where **accountname** is your account name.
-It will appear similar to the following image:
+The insights look similar to the following image:
 endif::[]
 
 image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align="left"]
@@ -328,7 +326,8 @@ The dependency also provides a JUnit5 Invocation Context Provider with the
 The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to `true` so
 that the results are sent to the Pact Broker after the tests are completed.
 
-The test target is defined in the [hotspot=context file=0]`PactVerificationContext` context to point to the running endpoint of the `system` microservice.
+The test target is defined in the [hotspot=context file=0]`PactVerificationContext` context
+to point to the running endpoint of the `system` microservice.
 
 The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=2]`given()` parameter
 that was provided in the `inventory` test class so that Pact can identify which test case to run against which endpoint.
@@ -342,7 +341,7 @@ that was provided in the `inventory` test class so that Pact can identify which 
 The `system` microservice uses the [hotspot=pactDependency file=1]`junit5` pact provider dependency
 to connect to the Pact Broker and verify the pact file.
 Ideally, in a CI/CD build pipeline, the [hotspot=version file=1]`pact.provider.version` element is
-dynamically set to the build number so that it's easier to identify at which point a breaking change is introduced.
+dynamically set to the build number so that you can identify where a breaking change is introduced.
 
 After you create the `SystemBrokerIT.java` class and replace the `pom.xml` file,
 Open Liberty automatically reloads its configuration.
@@ -352,7 +351,7 @@ Open Liberty automatically reloads its configuration.
 In the command-line session where you started the `system` microservice,
 press the `enter/return` key to run the tests to verify the pact file.
 When you integrate the Pact framework into a CI/CD build pipeline,
-the `mvn failsafe:integration-test` goal can be used to verify the pact file from the Pact Broker.
+you can use the `mvn failsafe:integration-test` goal to verify the pact file from the Pact Broker.
 
 The tests fail with the following errors:
 [role="no_copy"]
@@ -411,7 +410,7 @@ Verifying a pact between pact between Inventory (1.0-SNAPSHOT) and System
 // Static guide instruction
 ifndef::cloud-hosted[]
 After the tests are complete, refresh the Pact Broker webpage at the http://localhost:9292/[^] URL to
-confirm that there's now a timestamp in the last verified column:
+confirm that the last verified column now shows a timestamp:
 endif::[]
 
 // Cloud hosted guide instruction
@@ -419,7 +418,7 @@ ifdef::cloud-hosted[]
 After the tests are complete, refresh the Pact Broker at the
 **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, 
 where **accountname** is your account name.
-Confirm that there's now a timestamp in the last verified column:
+Confirm that the last verified column now shows a timestamp:
 endif::[]
 
 image::pact-broker-webpage-verified.png[Pact Broker webpage for verified, align="left"]
