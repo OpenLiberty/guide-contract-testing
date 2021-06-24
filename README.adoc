@@ -20,7 +20,7 @@
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
 :page-permalink: /guides/{projectid}
 :repo-description: Visit the https://openliberty.io/guides/{projectid}.html[website] for the rendered version of the guide.
-:common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/master
+:common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/prod
 :source-highlighter: prettify
 :imagesdir: /img/guide/{projectid}
 = Testing microservices with consumer-driven contracts
