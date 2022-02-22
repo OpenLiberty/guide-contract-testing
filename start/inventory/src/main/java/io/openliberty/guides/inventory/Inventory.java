@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
 package io.openliberty.guides.inventory;
@@ -26,7 +26,9 @@ public class Inventory {
 
   public String getServerName() {
     Client client = ClientBuilder.newClient();
-    Response response = client.target(url + "/system/properties/key/wlp.server.name").request().get();
+    Response response = client.target(url + "/system/properties/key/wlp.server.name")
+                              .request()
+                              .get();
     String result = response.readEntity(String.class);
     response.close();
     client.close();
@@ -35,7 +37,9 @@ public class Inventory {
 
   public String getEdition() {
     Client client = ClientBuilder.newClient();
-    Response response = client.target(url + "/system/properties/key/wlp.user.dir.isDefault").request().get();
+    Response response = client.target(url + "/system/properties/key/wlp.user.dir.isDefault")
+                              .request()
+                              .get();
     String result = response.readEntity(String.class);
     response.close();
     client.close();
@@ -44,7 +48,9 @@ public class Inventory {
 
   public String getVersion() {
     Client client = ClientBuilder.newClient();
-    Response response = client.target(url + "/system/properties/version").request().get();
+    Response response = client.target(url + "/system/properties/version")
+                              .request()
+                              .get();
     String result = response.readEntity(String.class);
     response.close();
     client.close();
@@ -53,7 +59,9 @@ public class Inventory {
 
   public String getInvalidProperty() {
     Client client = ClientBuilder.newClient();
-    Response response = client.target(url + "/system/properties/invalidProperty").request().get();
+    Response response = client.target(url + "/system/properties/invalidProperty")
+                              .request()
+                              .get();
     String result = response.readEntity(String.class);
     response.close();
     client.close();

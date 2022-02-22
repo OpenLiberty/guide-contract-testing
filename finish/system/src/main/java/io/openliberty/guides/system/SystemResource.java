@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     IBM Corporation - Initial implementation
  *******************************************************************************/
 // end::copyright[]
 package io.openliberty.guides.system;
@@ -62,8 +62,9 @@ public class SystemResource {
   @Produces(MediaType.APPLICATION_JSON)
   public JsonObject getVersion() {
     // tag::decimal[]
-    JsonObject response = Json.createObjectBuilder().add("system.properties.version", 1.1)
-      .build();
+    JsonObject response = Json.createObjectBuilder()
+                          .add("system.properties.version", 1.1)
+                          .build();
     // end::decimal[]
     return response;
   }
