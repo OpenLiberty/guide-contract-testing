@@ -37,7 +37,8 @@ public class Inventory {
 
   public String getEdition() {
     Client client = ClientBuilder.newClient();
-    Response response = client.target(url + "/system/properties/key/wlp.user.dir.isDefault")
+    Response response =
+             client.target(url + "/system/properties/key/wlp.user.dir.isDefault")
                               .request()
                               .get();
     String result = response.readEntity(String.class);
