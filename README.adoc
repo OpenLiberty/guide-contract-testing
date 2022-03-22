@@ -310,11 +310,6 @@ Failures:
 [INFO] 
 [ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
 ```
-SystemResource.java
-[source, java, linenums, role="code_column hide_tags=copyright"]
-----
-include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource.java[]
-----
 
 The test from the `system` microservice fails because the `inventory` microservice was expecting a decimal, `1.1`, for the value of the `system.properties.version` property, but it received a string, `"1.1"`.
 
@@ -325,6 +320,11 @@ Correct the value of the [hotspot=decimal file=0]`system.properties.version` pro
 `system/src/main/java/io/openliberty/guides/system/SystemResource.java`
 ----
 
+SystemResource.java
+[source, java, linenums, role="code_column hide_tags=copyright"]
+----
+include::finish/system/src/main/java/io/openliberty/guides/system/SystemResource.java[]
+----
 
 Press the `enter/return` key to rerun the tests from the command-line session where you started the `system` microservice.
 
