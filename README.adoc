@@ -101,22 +101,16 @@ Navigate to the `start/inventory` directory to begin.
 [role=command]
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
-InventoryPactIT.java
-[source, java, linenums, role="code_column hide_tags=copyright"]
-----
-include::finish/inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java[]
-----
-
-inventory/pom.xml
-[source, xml, linenums, role="code_column"]
-----
-include::finish/inventory/pom.xml[]
-----
-
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the InventoryPactIT class file.#
 `inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java`
+----
+
+InventoryPactIT.java
+[source, java, linenums, role="code_column hide_tags=copyright"]
+----
+include::finish/inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java[]
 ----
 
 The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`PactProviderRule` mock provider that mimics the HTTP responses from the `system` microservice. The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice as a parameter, which makes it easier to differentiate microservices from each other when you have multiple applications.
@@ -129,6 +123,12 @@ The test sends a real request with the [hotspot=mockTest file=0]`getUrl()` metho
 ----
 #Replace the inventory Maven project file.#
 `inventory/pom.xml`
+----
+
+inventory/pom.xml
+[source, xml, linenums, role="code_column"]
+----
+include::finish/inventory/pom.xml[]
 ----
 
 The Pact framework provides a [hotspot=pactPlugin file=1]`Maven` plugin that can be added to the build section of the `pom.xml` file. The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file. The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
@@ -233,18 +233,6 @@ image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align=
 
 == Implementing pact testing in the system service
 
-SystemBrokerIT.java
-[source, java, linenums, role='code_column hide_tags=copyright']
-----
-include::finish/system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java[]
-----
-
-system/pom.xml
-[source, xml, linenums, role='code_column hide_tags=copyright']
-----
-include::finish/system/pom.xml[]
-----
-
 InventoryPactIT.java
 [source, java, linenums, role="code_column hide_tags=copyright"]
 ----
@@ -273,6 +261,12 @@ After you see the following message, your application server in dev mode is read
 `system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java`
 ----
 
+SystemBrokerIT.java
+[source, java, linenums, role='code_column hide_tags=copyright']
+----
+include::finish/system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java[]
+----
+
 The connection information for the Pact Broker is provided with the [hotspot=connectionInfo file=0]`@PactBroker` annotation. The dependency also provides a JUnit5 Invocation Context Provider with the [hotspot=invocation file=0]`pactVerificationTestTemplate()` method to generate a test for each of the interactions.
 
 The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to `true` so that the results are sent to the Pact Broker after the tests are completed.
@@ -285,6 +279,12 @@ The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file
 ----
 #Replace the system Maven project file.#
 `system/pom.xml`
+----
+
+system/pom.xml
+[source, xml, linenums, role='code_column hide_tags=copyright']
+----
+include::finish/system/pom.xml[]
 ----
 
 The `system` microservice uses the [hotspot=pactDependency file=1]`junit5` pact provider dependency to connect to the Pact Broker and verify the pact file. Ideally, in a CI/CD build pipeline, the [hotspot=version file=1]`pact.provider.version` element is dynamically set to the build number so that you can identify where a breaking change is introduced.
