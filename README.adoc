@@ -109,6 +109,10 @@ endif::[]
 [role=command]
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
+ifdef::cloud-hosted[]
+Open a new command-line session.
+endif::[]
+
 [role="code_command hotspot file=0", subs="quotes"]
 ----
 #Create the InventoryPactIT class file.#
@@ -145,7 +149,7 @@ After you create the `InventoryPactIT.java` class and replace the `pom.xml` file
 
 The contract between the `inventory` and `system` microservices is known as a pact. Each pact is a collection of interactions. In this guide, those interactions are defined in the `InventoryPactIT` class.
 
-Press the `enter/return` key to run the tests and generate the pact file.
+On the `inventory` dev mode console, press the `enter/return` key to run the tests and generate the pact file.
 
 When completed, you'll see a similar output to the following example:
 [role="no_copy"]
@@ -198,7 +202,15 @@ The generated pact file is named `Inventory-System.json` and is located in the `
 }
 ----
 
-Open a new command-line session and navigate to the `start/inventory` directory. Publish the generated pact file to the Pact Broker by running the following command:
+Open a new command-line session and navigate to the `start/inventory` directory.
+
+ifdef::cloud-hosted[]
+```bash
+cd /home/project/guide-contract-testing/start/inventory
+```
+endif::[]
+
+Publish the generated pact file to the Pact Broker by running the following command:
 [role='command']
 ```
 mvn pact:publish
