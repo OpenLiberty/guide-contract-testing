@@ -99,6 +99,13 @@ You can refer to the https://docs.pact.io/pact_broker/docker_images/pactfoundati
 == Implementing pact testing in the inventory service
 
 Navigate to the `start/inventory` directory to begin.
+
+ifdef::cloud-hosted[]
+```bash
+cd /home/project/guide-contract-testing/start/inventory
+```
+endif::[]
+
 [role=command]
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
@@ -246,9 +253,15 @@ InventoryPactIT.java
 include::finish/inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java[]
 ----
 
-Navigate to the `start/system` directory.
+Open another command-line session and navigate to the `start/system` directory.
 
-Open another command-line session to start Open Liberty in dev mode for the `system` microservice:
+ifdef::cloud-hosted[]
+```bash
+cd /home/project/guide-contract-testing/start/system
+```
+endif::[]
+
+Start Open Liberty in dev mode for the `system` microservice:
 [role=command]
 ```
 mvn liberty:dev
