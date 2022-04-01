@@ -259,11 +259,6 @@ image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align=
 
 == Implementing pact testing in the system service
 
-InventoryPactIT.java
-[source, java, linenums, role="code_column hide_tags=copyright"]
-----
-include::finish/inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java[]
-----
 
 Open another command-line session and navigate to the `start/system` directory.
 
@@ -304,13 +299,19 @@ SystemBrokerIT.java
 include::finish/system/src/test/java/it/io/openliberty/guides/system/SystemBrokerIT.java[]
 ----
 
+InventoryPactIT.java
+[source, java, linenums, role="code_column hide_tags=copyright"]
+----
+include::finish/inventory/src/test/java/io/openliberty/guides/inventory/InventoryPactIT.java[]
+----
+
 The connection information for the Pact Broker is provided with the [hotspot=connectionInfo file=0]`@PactBroker` annotation. The dependency also provides a JUnit5 Invocation Context Provider with the [hotspot=invocation file=0]`pactVerificationTestTemplate()` method to generate a test for each of the interactions.
 
 The [hotspot=publish file=0]`pact.verifier.publishResults` property is set to `true` so that the results are sent to the Pact Broker after the tests are completed.
 
 The test target is defined in the [hotspot=context file=0]`PactVerificationContext` context to point to the running endpoint of the `system` microservice.
 
-The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=2]`given()` parameter that was provided in the `inventory` test class so that Pact can identify which test case to run against which endpoint.
+The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=1]`given()` parameter that was provided in the `inventory` test class so that Pact can identify which test case to run against which endpoint.
 
 [role="code_command hotspot file=1", subs="quotes"]
 ----
@@ -324,7 +325,7 @@ system/pom.xml
 include::finish/system/pom.xml[]
 ----
 
-The `system` microservice uses the [hotspot=pactDependency file=1]`junit5` pact provider dependency to connect to the Pact Broker and verify the pact file. Ideally, in a CI/CD build pipeline, the [hotspot=version file=1]`pact.provider.version` element is dynamically set to the build number so that you can identify where a breaking change is introduced.
+The `system` microservice uses the [hotspot=pactDependency file=2]`junit5` pact provider dependency to connect to the Pact Broker and verify the pact file. Ideally, in a CI/CD build pipeline, the [hotspot=version file=2]`pact.provider.version` element is dynamically set to the build number so that you can identify where a breaking change is introduced.
 
 After you create the `SystemBrokerIT.java` class and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
