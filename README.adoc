@@ -84,7 +84,7 @@ endif::[]
 
 // Cloud hosted guide instruction
 ifdef::cloud-hosted[]
-Confirm that the Pact Broker is working. Click the following button, or select ***Launch Application*** from the menu of the IDE and type ***9292*** to specify the port number for the Pact Broker service. Click the ***OK*** button. The Pact Broker can also be found at the **`https://accountname-9292.theiadocker-4.proxy.cognitiveclass.ai`** URL, where ***accountname*** is your account name.
+Click the following button to visit the Pact Broker to confirm that it is working.
 ::startApplication{port="9292" display="external" name="Visit Pact Broker" route="/"}
 
 Confirm that you can access the user interface of the Pact Broker. The Pact Broker interface is similar to the following image:
