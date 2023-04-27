@@ -7,6 +7,7 @@
 *
 * SPDX-License-Identifier: EPL-2.0
 *******************************************************************************/
+/* eslint-disable no-use-before-define */
 function displayMetrics () {
   getSystemMetrics()
 }
@@ -226,3 +227,4 @@ function addSourceRow (table, url) {
   sourceRow.appendChild(sourceText)
   table.appendChild(sourceRow)
 }
+/* eslint-disable no-use-before-define */
