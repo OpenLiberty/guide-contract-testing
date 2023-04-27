@@ -7,7 +7,7 @@
 *
 * SPDX-License-Identifier: EPL-2.0
 *******************************************************************************/
-/* eslint-disable no-use-before-define */
+/* eslint-disable */
 function displayMetrics () {
   getSystemMetrics()
 }
