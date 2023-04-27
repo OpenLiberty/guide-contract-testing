@@ -43,7 +43,7 @@ function displayMetrics () {
       const matchMetrics = resp.match(regexpToMatch)
   
       const keyValPairs = {}
-      for (let metricKey in metricToDisplay) {
+      for (const metricKey in metricToDisplay) {
         matchMetrics.forEach(function (line) {
           const keyToMatch = metricKey + ' (.*)'
           const keyVal = line.match(new RegExp(keyToMatch))
@@ -60,7 +60,7 @@ function displayMetrics () {
       }
   
       const table = document.getElementById('metricsTableBody')
-      for (let key in keyValPairs) {
+      for (const key in keyValPairs) {
         const row = document.createElement('tr')
         const keyData = document.createElement('td')
         keyData.innerText = key
@@ -89,7 +89,7 @@ function displayMetrics () {
       displayMetrics()
       if (req.status !== 200) {
         table.innerHTML = ''
-        let row = document.createElement('tr')
+        const row = document.createElement('tr')
         const th = document.createElement('th')
         th.innerText = req.statusText
         row.appendChild(th)
@@ -176,7 +176,7 @@ function displayMetrics () {
       const resp = JSON.parse(req.responseText)
       const configProps = resp.ConfigProperties
       const table = document.getElementById('configTableBody')
-      for (let key in configProps) {
+      for (const key in configProps) {
         const row = document.createElement('tr')
         const keyData = document.createElement('td')
         keyData.innerText = configToDisplay[key]
