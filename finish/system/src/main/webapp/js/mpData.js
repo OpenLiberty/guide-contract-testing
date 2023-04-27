@@ -227,4 +227,3 @@ function addSourceRow (table, url) {
   sourceRow.appendChild(sourceText)
   table.appendChild(sourceRow)
 }
-/* eslint-disable no-use-before-define */
