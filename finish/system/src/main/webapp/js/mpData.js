@@ -32,8 +32,8 @@ function getSystemMetrics () {
   metricToMatch += ')\\s*(\\S*)$'
 
   req.onreadystatechange = function () {
-    if (req.readyState != 4) return // Not there yet
-    if (req.status != 200) {
+    if (req.readyState !== 4) return // Not there yet
+    if (req.status !== 200) {
       document.getElementById('metricsText').innerHTML = req.statusText
       return
     }
@@ -43,7 +43,7 @@ function getSystemMetrics () {
     const matchMetrics = resp.match(regexpToMatch)
 
     const keyValPairs = {}
-    for (var metricKey in metricToDisplay) {
+    for (let metricKey in metricToDisplay) {
       matchMetrics.forEach(function (line) {
         const keyToMatch = metricKey + ' (.*)'
         const keyVal = line.match(new RegExp(keyToMatch))
@@ -60,7 +60,7 @@ function getSystemMetrics () {
     }
 
     const table = document.getElementById('metricsTableBody')
-    for (key in keyValPairs) {
+    for (let key in keyValPairs) {
       const row = document.createElement('tr')
       const keyData = document.createElement('td')
       keyData.innerText = key
@@ -78,10 +78,6 @@ function getSystemMetrics () {
   req.send()
 }
 
-function displaySystemProperties () {
-  getSystemPropertiesRequest()
-}
-
 function getSystemPropertiesRequest () {
   const propToDisplay = ['java.vendor', 'java.version', 'user.name', 'os.name', 'wlp.install.dir', 'wlp.server.name']
   const url = 'http://localhost:9080/system/properties'
@@ -89,11 +85,11 @@ function getSystemPropertiesRequest () {
   const table = document.getElementById('systemPropertiesTable')
   // Create the callback:
   req.onreadystatechange = function () {
-    if (req.readyState != 4) return // Not there yet
+    if (req.readyState !== 4) return // Not there yet
     displayMetrics()
-    if (req.status != 200) {
+    if (req.status !== 200) {
       table.innerHTML = ''
-      var row = document.createElement('tr')
+      let row = document.createElement('tr')
       const th = document.createElement('th')
       th.innerText = req.statusText
       row.appendChild(th)
@@ -106,8 +102,8 @@ function getSystemPropertiesRequest () {
     const resp = JSON.parse(req.responseText)
     for (let i = 0; i < propToDisplay.length; i++) {
       const key = propToDisplay[i]
-      if (resp.hasOwnProperty(key)) {
-        var row = document.createElement('tr')
+      if (Object.prototype.hasOwnProperty.call(resp, key)) {
+        row = document.createElement('tr')
         const keyData = document.createElement('td')
         keyData.innerText = key
         const valueData = document.createElement('td')
@@ -124,10 +120,6 @@ function getSystemPropertiesRequest () {
   req.send()
 }
 
-function displayHealth () {
-  getHealth()
-}
-
 function getHealth () {
   const url = 'http://localhost:9080/health'
   const req = new XMLHttpRequest()
@@ -138,12 +130,11 @@ function getHealth () {
   const healthIcon = document.getElementById('healthStatusIconImage')
 
   req.onreadystatechange = function () {
-    if (req.readyState != 4) return // Not there yet
+    if (req.readyState !== 4) return // Not there yet
 
     // Request successful, read the response
     if (req.responseText) {
       const resp = JSON.parse(req.responseText)
-      const service = resp.checks[0] // TODO: use for loop for multiple services
 
       resp.checks.forEach(function (service) {
         serviceName.innerText = service.name
@@ -166,10 +157,6 @@ function getHealth () {
   req.send()
 }
 
-function displayConfigProperties () {
-  getConfigPropertiesRequest()
-}
-
 function getConfigPropertiesRequest () {
   const url = 'http://localhost:9080/config'
   const req = new XMLHttpRequest()
@@ -180,8 +167,8 @@ function getConfigPropertiesRequest () {
   configToDisplay.io_openliberty_sample_port_number = 'Port Number'
   // Create the callback:
   req.onreadystatechange = function () {
-    if (req.readyState != 4) return // Not there yet
-    if (req.status != 200) {
+    if (req.readyState !== 4) return // Not there yet
+    if (req.status !== 200) {
       return
     }
 
@@ -189,7 +176,7 @@ function getConfigPropertiesRequest () {
     const resp = JSON.parse(req.responseText)
     const configProps = resp.ConfigProperties
     const table = document.getElementById('configTableBody')
-    for (key in configProps) {
+    for (let key in configProps) {
       const row = document.createElement('tr')
       const keyData = document.createElement('td')
       keyData.innerText = configToDisplay[key]
@@ -235,7 +222,7 @@ function addSourceRow (table, url) {
   sourceRow.classList.add('sourceRow')
   const sourceText = document.createElement('td')
   sourceText.setAttribute('colspan', '100%')
-  sourceText.innerHTML = "API Source\: <a href='" + url + "'>" + url + '</a>'
+  sourceText.innerHTML = "API Source: <a href='" + url + "'>" + url + '</a>'
   sourceRow.appendChild(sourceText)
   table.appendChild(sourceRow)
 }
