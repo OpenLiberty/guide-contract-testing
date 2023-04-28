@@ -295,7 +295,7 @@ After you see the following message, your application server in dev mode is read
 {empty} +
 
 ifndef::cloud-hosted[]
-Open another command-line session and navigate back to the `start` directory to continue. Alternatively, you can open the project in your editor and navigate to the `start` directory from there.
+Open another command-line session and navigate back to the `start` directory to continue.
 endif::[]
 
 ifdef::cloud-hosted[]
