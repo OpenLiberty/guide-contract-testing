@@ -1,4 +1,4 @@
-// Copyright (c) 2022 IBM Corporation and others.
+// Copyright (c) 2022, 2023 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -110,6 +110,10 @@ endif::[]
 [role=command]
 include::{common-includes}/devmode-lmp33-start.adoc[]
 
+ifndef::cloud-hosted[]
+Navigate back to the `start` directory.
+endif::[]
+
 ifdef::cloud-hosted[]
 Open a new command-line session.
 endif::[]
@@ -203,9 +207,13 @@ The generated pact file is named `Inventory-System.json` and is located in the `
 }
 ----
 
-Open a new command-line session and navigate to the `start/inventory` directory.
+ifndef::cloud-hosted[]
+Now, navigate to the `start/inventory` directory again.
+endif::[]
 
 ifdef::cloud-hosted[]
+Open a new command-line session and navigate to the `start/inventory` directory.
+
 ```bash
 cd /home/project/guide-contract-testing/start/inventory
 ```
@@ -285,6 +293,10 @@ After you see the following message, your application server in dev mode is read
 *    Liberty is running in dev mode.
 ----
 {empty} +
+
+ifndef::cloud-hosted[]
+Open another command-line session and navigate back to the `start` directory to continue.
+endif::[]
 
 ifdef::cloud-hosted[]
 Open a new command-line session.
@@ -424,8 +436,8 @@ endif::[]
 [role='command']
 ```
 docker-compose -f "pact-broker/docker-compose.yml" down
-docker rmi postgres:12
-docker rmi pactfoundation/pact-broker:2.62.0.0
+docker rmi postgres:15
+docker rmi pactfoundation/pact-broker:2.106.0.1
 docker volume rm pact-broker_postgres-volume
 ```
 
