@@ -91,7 +91,7 @@ Click the following button to visit the Pact Broker to confirm that it is workin
 Confirm that you can access the user interface of the Pact Broker. The Pact Broker interface is similar to the following image:
 endif::[]
 
-image::pact-broker-webpage.png[Pact Broker webpage, align="left"]
+image::pact-broker-webpage.png[Pact Broker webpage,width=90%,align="center"]
 
 {empty} +
 
@@ -248,7 +248,7 @@ Refresh the Pact Broker at the `https://accountname-9292.theiadocker-4.proxy.cog
 The last verified column doesn't show a timestamp because the ***system*** microservice hasn't verified the pact yet.
 endif::[]
 
-image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry, align="left"]
+image::pact-broker-webpage-refresh.png[Pact Broker webpage for new entry,width=90%,align="center"]
 
 {empty} +
 
@@ -266,7 +266,7 @@ You can see detailed insights about each interaction by clicking the following b
 The insights look similar to the following image:
 endif::[]
 
-image::pact-broker-interactions.png[Pact Broker webpage for Interactions, align="left"]
+image::pact-broker-interactions.png[Pact Broker webpage for Interactions,width=90%,align="center"]
 
 == Implementing pact testing in the system service
 
@@ -415,7 +415,7 @@ After the tests are complete, refresh the Pact Broker at the `https://accountnam
 Confirm that the last verified column now shows a timestamp:
 endif::[]
 
-image::pact-broker-webpage-verified.png[Pact Broker webpage for verified, align="left"]
+image::pact-broker-webpage-verified.png[Pact Broker webpage for verified,width=90%,align="center"]
 
 {empty} +
 
