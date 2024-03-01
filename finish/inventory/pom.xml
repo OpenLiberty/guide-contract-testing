@@ -68,7 +68,7 @@
                             <name>System</name>
                             <protocol>http</protocol>
                             <host>localhost</host>
-                            <port>9080</port>
+                            <port>9090</port>
                             <path>/</path>
                             // tag::pactDirectory[]
                             <pactFileDirectory>target/pacts</pactFileDirectory>
