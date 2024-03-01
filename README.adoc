@@ -328,7 +328,7 @@ The test target is defined in the [hotspot=context file=0]`PactVerificationConte
 
 The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=1]`given()` parameter that was provided in the `inventory` test class so that Pact can identify which test case to run against which endpoint.
 
-[role="code_command hotspot file=3", subs="quotes"]
+[role="code_command hotspot file=2", subs="quotes"]
 ----
 #Replace the system Maven project file.#
 `system/pom.xml`
