@@ -44,5 +44,5 @@ mvn -ntp failsafe:integration-test liberty:stop
 cd ../..
 docker-compose -f "pact-broker/docker-compose.yml" down
 docker rmi postgres:16.1
-docker rmi pactfoundation/pact-broker:latest-multi
+docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
