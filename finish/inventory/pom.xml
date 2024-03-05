@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.11</version>
+            <version>2.0.12</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -60,7 +60,7 @@
             <plugin>
                 <groupId>au.com.dius.pact.provider</groupId>
                 <artifactId>maven</artifactId>
-                <version>4.6.5</version>
+                <version>4.6.7</version>
                 <configuration>
                     <serviceProviders>
                         // tag::serviceProvider[]
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
             </plugin>
             <!-- Plugin to run functional tests -->
             <plugin>
@@ -105,7 +105,7 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.10</version>
+                <version>3.10.1</version>
             </plugin>
         </plugins>
     </build>
