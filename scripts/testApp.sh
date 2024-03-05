@@ -43,6 +43,6 @@ mvn -ntp failsafe:integration-test liberty:stop
 ## Remove the pact-broker application
 cd ../..
 docker-compose -f "pact-broker/docker-compose.yml" down
-docker rmi postgres:15
-docker rmi pactfoundation/pact-broker:2.106.0.1
+docker rmi postgres:16.1
+docker rmi pactfoundation/pact-broker:latest-multi
 docker volume rm pact-broker_postgres-volume
