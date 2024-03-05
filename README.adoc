@@ -1,4 +1,4 @@
-// Copyright (c) 2022, 2023 IBM Corporation and others.
+// Copyright (c) 2022, 2024 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -16,7 +16,7 @@
 :page-seo-title: Implement consumer-driven contract testing for Java microservices using the Pact framework
 :page-seo-description: A getting started tutorial with examples on how to implement consumer-driven contract testing using the Pact framework for Java microservices and cloud-native applications written using MicroProfile and Jakarta EE API.
 :guide-author: Open Liberty
-:page-tags: ['MicroProfile', 'Jakarta EE']
+:page-tags: ['microprofile', 'jakarta-ee']
 :page-related-guides: ['microshed-testing', 'reactive-service-testing', 'arquillian-managed']
 :page-permalink: /guides/{projectid}
 :repo-description: Visit the https://openliberty.io/guides/{projectid}.html[website] for the rendered version of the guide.
@@ -132,7 +132,7 @@ include::finish/inventory/src/test/java/io/openliberty/guides/inventory/Inventor
 
 The `InventoryPactIT` class contains a [hotspot=mockprovider file=0]`PactProviderRule` mock provider that mimics the HTTP responses from the `system` microservice. The [hotspot=pact file=0]`@Pact` annotation takes the name of the microservice as a parameter, which makes it easier to differentiate microservices from each other when you have multiple applications.
 
-The [hotspot=builder file=0]`createPactServer()` method defines the minimal expected responsezfor a specific endpoint, which is known as an interaction. For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
+The [hotspot=builder file=0]`createPactServer()` method defines the minimal expected responses for a specific endpoint, which is known as an interaction. For each interaction, the expected request and the response are registered with the mock service by using the [hotspot=verification file=0]`@PactVerification` annotation.
 
 The test sends a real request with the [hotspot=mockTest file=0]`getUrl()` method of the mock provider. The mock provider compares the actual request with the expected request and confirms whether the comparison is successful. Finally, the [hotspot=unitTest file=0]`assertEquals()` method confirms that the response is correct.
 
