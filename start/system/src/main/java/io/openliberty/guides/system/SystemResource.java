@@ -1,6 +1,6 @@
 // tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2021, 2022 IBM Corporation and others.
+ * Copyright (c) 2021, 2024 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -61,7 +61,7 @@ public class SystemResource {
   @Produces(MediaType.APPLICATION_JSON)
   public JsonObject getVersion() {
     JsonObject response = Json.createObjectBuilder()
-                              .add("system.properties.version", "1.1")
+                              .add("system.properties.version", "1.x")
                               .build();
     return response;
   }
