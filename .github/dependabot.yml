@@ -1,7 +1,22 @@
 version: 2
 updates:
 - package-ecosystem: maven
-  directory: "/"
+  directory: "/finish/inventory"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 50
+- package-ecosystem: maven
+  directory: "/finish/system"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 50
+- package-ecosystem: maven
+  directory: "/start/inventory"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 50
+- package-ecosystem: maven
+  directory: "/start/system"
   schedule:
     interval: monthly
   open-pull-requests-limit: 50
