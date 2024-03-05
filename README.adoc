@@ -357,7 +357,7 @@ Failures:
 
 1) Verifying a pact between Inventory and System - a request for the version has a matching body
 
-    1.1) body: $.system.properties.version Expected "1.1" (String) to be a decimal number
+    1.1) body: $.system.properties.version Expected "1.x" (String) to be a decimal number
 
 
 [INFO] 
