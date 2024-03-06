@@ -328,7 +328,7 @@ The test target is defined in the [hotspot=context file=0]`PactVerificationConte
 
 The [hotspot=state file=0]`@State` annotation must match the [hotspot=given file=1]`given()` parameter that was provided in the `inventory` test class so that Pact can identify which test case to run against which endpoint.
 
-[role="code_command hotspot file=1", subs="quotes"]
+[role="code_command hotspot file=2", subs="quotes"]
 ----
 #Replace the system Maven project file.#
 `system/pom.xml`
@@ -357,7 +357,7 @@ Failures:
 
 1) Verifying a pact between Inventory and System - a request for the version has a matching body
 
-    1.1) body: $.system.properties.version Expected "1.1" (String) to be a decimal number
+    1.1) body: $.system.properties.version Expected "1.x" (String) to be a decimal number
 
 
 [INFO] 
@@ -436,8 +436,8 @@ endif::[]
 [role='command']
 ```
 docker-compose -f "pact-broker/docker-compose.yml" down
-docker rmi postgres:15
-docker rmi pactfoundation/pact-broker:2.106.0.1
+docker rmi postgres:16.2
+docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
 ```
 

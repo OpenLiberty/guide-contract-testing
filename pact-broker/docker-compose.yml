@@ -1,7 +1,7 @@
 version: "3"
 services:
   postgres:
-    image: postgres:15
+    image: postgres:16.2
     healthcheck:
       test: psql postgres --command "select 1" -U postgres
     ports:
@@ -13,7 +13,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
   pact-broker:
-    image: pactfoundation/pact-broker:2.106.0.1
+    image: pactfoundation/pact-broker:latest
     restart: always
     ports:
       - "9292:9292"
