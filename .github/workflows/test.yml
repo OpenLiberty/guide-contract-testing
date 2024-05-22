@@ -55,6 +55,7 @@ jobs:
       - name: Post tests
         if: always()
         run: |
+          sudo docker images
           logsPath=$(find . -name "console.log");
           sudo cat "$logsPath" | grep Launching
       - name: Archive server logs if failed
