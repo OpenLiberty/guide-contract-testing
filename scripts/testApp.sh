@@ -5,7 +5,7 @@ set -euxo pipefail
 
 # Start Pact Broker
 cd ..
-docker-compose -f "pact-broker/docker-compose.yml" up -d --build
+docker compose -f "pact-broker/docker-compose.yml" up -d --build
 
 ## Build the inventory service
 #       package                   - Take the compiled code and package it in its distributable format.
@@ -42,7 +42,7 @@ mvn -ntp failsafe:integration-test liberty:stop
 
 ## Remove the pact-broker application
 cd ../..
-docker-compose -f "pact-broker/docker-compose.yml" down
+docker compose -f "pact-broker/docker-compose.yml" down
 docker rmi postgres:16.2
 docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
