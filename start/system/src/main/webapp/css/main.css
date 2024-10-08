@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (c) 2018 IBM Corporation and others.
+* Copyright (c) 2018, 2024 IBM Corporation and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License 2.0
 * which accompanies this distribution, and is available at
@@ -8,8 +8,6 @@
 * SPDX-License-Identifier: EPL-2.0
 *******************************************************************************/
 /* stylelint-disable */
-@import url("https://fonts.googleapis.com/css?family=Asap:300,400,500");
-
 @font-face {
     font-family: BunueloLight;
     src: url("/fonts/BunueloCleanPro-Light.woff");
@@ -21,7 +19,7 @@
 }
 
 body{
-    font-family:Asap;
+    font-family: BunueloSemiBold;
     font-size: 16px;
     color:#24243b;
     background-color: white;
@@ -61,7 +59,7 @@ p {
     margin-top: 0px;
 }
 h1 {
-    font-family:BunueloSemiBold;
+    font-family: BunueloSemiBold;
     font-size: 40px;
     font-weight: 400;
     letter-spacing:0;
@@ -226,7 +224,7 @@ button {
     height:44px;
     color:#24253a;
     text-align:center;
-    font-family: Asap;
+    font-family: BunueloSemiBold;
     margin-top: 25px;
     margin-bottom: 70px;
     cursor: pointer;
@@ -392,7 +390,7 @@ td {
 }
 
 .bodyFooterLink {
-  font-family: Asap;
+  font-family: BunueloSemiBold;
   font-weight: 300;
   font-size: 14px;
   letter-spacing: 0;
