@@ -73,8 +73,9 @@ docker-compose -f "pact-broker/docker-compose.yml" up -d --build
 When the Pact Broker is running, you'll see the following output:
 [role="no_copy"]
 ```
-Creating pact-broker_postgres_1 ... done
-Creating pact-broker_pact-broker_1 ... done
+...
+Container pact-broker-postgres-1      Started
+Container pact-broker-pact-broker-1   Started
 ```
 
 // Static guide instruction
@@ -436,7 +437,7 @@ endif::[]
 [role='command']
 ```
 docker-compose -f "pact-broker/docker-compose.yml" down
-docker rmi postgres:16.2
+docker rmi postgres:17.2
 docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
 ```
