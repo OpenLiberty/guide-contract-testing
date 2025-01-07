@@ -39,7 +39,7 @@
         <dependency>
             <groupId>au.com.dius.pact.provider</groupId>
             <artifactId>junit5</artifactId>
-            <version>4.6.15</version>
+            <version>4.6.16</version>
         </dependency>
         <!-- end::pactDependency[] -->
         <dependency>
@@ -63,7 +63,7 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.11.1</version>
+                <version>3.11.2</version>
             </plugin>
             <!-- end::libertyMavenPlugin[] -->
             <plugin>
