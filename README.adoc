@@ -124,7 +124,7 @@ mvnw.cmd -pl inventory liberty:dev
 --
 [role='command']
 ```
-./mvnw packa-pl inventory liberty:devge
+./mvnw -pl inventory liberty:dev
 ```
 --
 
@@ -339,7 +339,7 @@ mvnw.cmd -pl system liberty:dev
 --
 [role='command']
 ```
-./mvnw packa-pl system liberty:devge
+./mvnw -pl system liberty:dev
 ```
 --
 
