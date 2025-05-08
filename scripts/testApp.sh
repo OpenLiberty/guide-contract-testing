@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 # LMP 3.0+ goals are listed here: https://github.com/OpenLiberty/ci.maven#goals
+./mvnw -version
 
 # Start Pact Broker
 cd ..
@@ -12,10 +13,11 @@ docker compose -f "pact-broker/docker-compose.yml" up -d --build
 #       liberty:create            - Create a Liberty server.
 #       liberty:install-feature   - Install a feature packaged as a Subsystem Archive (esa) to the Liberty runtime.
 #       liberty:deploy            - Copy applications to the Liberty server's dropins or apps directory.
-cd finish/inventory
-mvn -ntp -Dhttp.keepAlive=false \
+cd finish
+./mvnw -ntp -Dhttp.keepAlive=false \
     -Dmaven.wagon.http.pool=false \
     -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 \
+    -f inventory/pom.xml \
     -q clean package liberty:create liberty:install-feature liberty:deploy
 
 ## Run the integration and publish goal for inventory service
@@ -25,23 +27,23 @@ mvn -ntp -Dhttp.keepAlive=false \
 #       failsafe:integration-test - Runs the integration tests of an application.
 #       liberty:stop              - Stop a Liberty server.
 #       failsafe:verify           - Verifies that the integration tests of an application passed.
-mvn -ntp liberty:start
-mvn -ntp failsafe:integration-test liberty:stop
-mvn -ntp pact:publish
+./mvnw -ntp -f inventory/pom.xml liberty:start
+./mvnw -ntp -f inventory/pom.xml failsafe:integration-test liberty:stop
+./mvnw -ntp -f inventory/pom.xml pact:publish
 
 ## Build the system service
-cd ../system
-mvn -ntp -Dhttp.keepAlive=false \
+./mvnw -ntp -Dhttp.keepAlive=false \
     -Dmaven.wagon.http.pool=false \
     -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 \
+    -f system/pom.xml \
     -q clean package liberty:create liberty:install-feature liberty:deploy
 
 ## Run the integration and publish goal for system service
-mvn -ntp liberty:start
-mvn -ntp failsafe:integration-test liberty:stop
+./mvnw -ntp -f system/pom.xml liberty:start
+./mvnw -ntp -f system/pom.xml failsafe:integration-test liberty:stop
 
 ## Remove the pact-broker application
-cd ../..
+cd ..
 docker compose -f "pact-broker/docker-compose.yml" down
 docker rmi postgres:17.2
 docker rmi pactfoundation/pact-broker:latest
