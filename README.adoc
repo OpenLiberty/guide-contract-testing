@@ -116,7 +116,7 @@ include::{common-includes}/os-tabs.adoc[]
 --
 [role='command']
 ```
-mvnw.cmd -pl inventory liberty:dev
+mvnw.cmd -f inventory/pom.xml liberty:dev
 ```
 --
 
@@ -124,7 +124,7 @@ mvnw.cmd -pl inventory liberty:dev
 --
 [role='command']
 ```
-./mvnw -pl inventory liberty:dev
+./mvnw -f inventory/pom.xml liberty:dev
 ```
 --
 
@@ -132,7 +132,7 @@ mvnw.cmd -pl inventory liberty:dev
 --
 [role='command']
 ```
-./mvnw -pl inventory liberty:dev
+./mvnw -f inventory/pom.xml liberty:dev
 ```
 --
 
@@ -235,6 +235,10 @@ The generated pact file is named `Inventory-System.json` and is located in the `
 }
 ----
 
+ifndef::cloud-hosted[]
+Now, navigate to the `start` directory again.
+endif::[]
+
 ifdef::cloud-hosted[]
 Open a new command-line session and navigate to the `start` directory.
 
@@ -251,7 +255,7 @@ include::{common-includes}/os-tabs.adoc[]
 --
 [role='command']
 ```
-mvnw.cmd -pl inventory pact:publish
+mvnw.cmd -f inventory/pom.xml pact:publish
 ```
 --
 
@@ -259,7 +263,7 @@ mvnw.cmd -pl inventory pact:publish
 --
 [role='command']
 ```
-./mvnw -pl inventory pact:publish
+./mvnw -f inventory/pom.xml pact:publish
 ```
 --
 
@@ -267,7 +271,7 @@ mvnw.cmd -pl inventory pact:publish
 --
 [role='command']
 ```
-./mvnw -pl inventory pact:publish
+./mvnw -f inventory/pom.xml pact:publish
 ```
 --
 
@@ -331,7 +335,7 @@ Start Open Liberty in dev mode for the `system` microservice:
 --
 [role='command']
 ```
-mvnw.cmd -pl system liberty:dev
+mvnw.cmd -f system/pom.xml liberty:dev
 ```
 --
 
@@ -339,7 +343,7 @@ mvnw.cmd -pl system liberty:dev
 --
 [role='command']
 ```
-./mvnw -pl system liberty:dev
+./mvnw -f system/pom.xml liberty:dev
 ```
 --
 
@@ -347,7 +351,7 @@ mvnw.cmd -pl system liberty:dev
 --
 [role='command']
 ```
-./mvnw -pl system liberty:dev
+./mvnw -f system/pom.xml liberty:dev
 ```
 --
 
