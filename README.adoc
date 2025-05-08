@@ -331,6 +331,8 @@ endif::[]
 
 Start Open Liberty in dev mode for the `system` microservice:
 
+include::{common-includes}/os-tabs.adoc[]
+
 [.tab_content.windows_section]
 --
 [role='command']
