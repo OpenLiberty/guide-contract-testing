@@ -116,7 +116,7 @@ include::{common-includes}/os-tabs.adoc[]
 --
 [role='command']
 ```
-mvnw.cmd -f inventory/pom.xml liberty:dev
+mvnw.cmd -f inventory\pom.xml liberty:dev
 ```
 --
 
@@ -255,7 +255,7 @@ include::{common-includes}/os-tabs.adoc[]
 --
 [role='command']
 ```
-mvnw.cmd -f inventory/pom.xml pact:publish
+mvnw.cmd -f inventory\pom.xml pact:publish
 ```
 --
 
@@ -337,7 +337,7 @@ include::{common-includes}/os-tabs.adoc[]
 --
 [role='command']
 ```
-mvnw.cmd -f system/pom.xml liberty:dev
+mvnw.cmd -f system\pom.xml liberty:dev
 ```
 --
 
