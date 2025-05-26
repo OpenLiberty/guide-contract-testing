@@ -67,7 +67,7 @@ include::{common-includes}/gitclone.adoc[]
 Run the following command to start the Pact Broker:
 [role='command']
 ```
-docker-compose -f "pact-broker/docker-compose.yml" up -d --build
+docker compose -f "pact-broker/docker-compose.yml" up -d --build
 ```
 
 When the Pact Broker is running, you'll see the following output:
@@ -507,7 +507,7 @@ endif::[]
 
 [role='command']
 ```
-docker-compose -f "pact-broker/docker-compose.yml" down
+docker compose -f "pact-broker/docker-compose.yml" down
 docker rmi postgres:17.2
 docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
