@@ -176,7 +176,7 @@ inventory/pom.xml
 include::finish/inventory/pom.xml[]
 ----
 
-The Pact framework provides a [hotspot=pactPlugin file=1]`Maven` plugin that can be added to the build section of the `pom.xml` file. The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file. The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
+The Pact framework provides a [hotspot=pactPlugin file=1]`maven` plugin that can be added to the build section of the `pom.xml` file. The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file. The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
 
 After you create the `InventoryPactIT.java` class and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
@@ -198,7 +198,7 @@ When completed, you'll see a similar output to the following example:
 [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ```
 
-When you integrate the Pact framework in a CI/CD build pipeline, you can use the Maven `failsafe:integration-test` goal to generate the pact file. The Maven failsafe plug-in provides a lifecycle phase for running integration tests that run after unit tests. By default, it looks for classes that are suffixed with `IT`, which stands for Integration Test. You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plug-in documentation^] for more information.
+When you integrate the Pact framework in a CI/CD build pipeline, you can use the Maven `failsafe:integration-test` goal to generate the pact file. The Maven `failsafe` plug-in provides a lifecycle phase for running integration tests that run after unit tests. By default, it looks for classes that are suffixed with `IT`, which stands for Integration Test. You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plug-in documentation^] for more information.
 
 The generated pact file is named `Inventory-System.json` and is located in the `inventory/target/pacts` directory. The pact file contains the defined interactions in JSON format:
 
