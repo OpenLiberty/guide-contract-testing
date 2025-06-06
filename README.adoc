@@ -67,7 +67,7 @@ include::{common-includes}/gitclone.adoc[]
 Run the following command to start the Pact Broker:
 [role='command']
 ```
-docker-compose -f "pact-broker/docker-compose.yml" up -d --build
+docker compose -f "pact-broker/docker-compose.yml" up -d --build
 ```
 
 When the Pact Broker is running, you'll see the following output:
@@ -100,24 +100,51 @@ You can refer to the https://docs.pact.io/pact_broker/docker_images/pactfoundati
 
 == Implementing pact testing in the inventory service
 
-Navigate to the `start/inventory` directory to begin.
+Navigate to the `start` directory to begin.
 
 ifdef::cloud-hosted[]
 ```bash
-cd /home/project/guide-contract-testing/start/inventory
+cd /home/project/guide-contract-testing/start
 ```
 endif::[]
 
-[role=command]
-include::{common-includes}/devmode-lmp33-start.adoc[]
+When you run Open Liberty in https://openliberty.io/docs/latest/development-mode.html[dev mode^], dev mode listens for file changes and automatically recompiles and deploys your updates whenever you save a new change. Run the following goal to start Open Liberty in dev mode:
 
-ifndef::cloud-hosted[]
-Navigate back to the `start` directory.
-endif::[]
+include::{common-includes}/os-tabs.adoc[]
 
-ifdef::cloud-hosted[]
-Open a new command-line session.
-endif::[]
+[.tab_content.windows_section]
+--
+[role='command']
+```
+mvnw.cmd -f inventory\pom.xml liberty:dev
+```
+--
+
+[.tab_content.mac_section]
+--
+[role='command']
+```
+./mvnw -f inventory/pom.xml liberty:dev
+```
+--
+
+[.tab_content.linux_section]
+--
+[role='command']
+```
+./mvnw -f inventory/pom.xml liberty:dev
+```
+--
+
+After you see the following message, your Liberty instance is ready in dev mode:
+
+[role="no_copy"]
+----
+**************************************************************
+*    Liberty is running in dev mode.
+----
+
+Dev mode holds your command-line session to listen for file changes. Open another command-line session to continue, or open the project in your editor.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
@@ -149,7 +176,7 @@ inventory/pom.xml
 include::finish/inventory/pom.xml[]
 ----
 
-The Pact framework provides a [hotspot=pactPlugin file=1]`Maven` plugin that can be added to the build section of the `pom.xml` file. The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file. The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
+The Pact framework provides a [hotspot=pactPlugin file=1]`maven` plugin that can be added to the build section of the `pom.xml` file. The [hotspot=serviceProvider file=1]`serviceProvider` element defines the endpoint URL for the `system` microservice and the [hotspot=pactDirectory file=1]`pactFileDirectory` directory where you want to store the pact file. The [hotspot=pactJunit file=1]`pact-jvm-consumer-junit` dependency provides the base test class that you can use with JUnit to build unit tests.
 
 After you create the `InventoryPactIT.java` class and replace the `pom.xml` file, Open Liberty automatically reloads its configuration.
 
@@ -171,7 +198,7 @@ When completed, you'll see a similar output to the following example:
 [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 ```
 
-When you integrate the Pact framework in a CI/CD build pipeline, you can use the `mvn failsafe:integration-test` goal to generate the pact file. The Maven failsafe plug-in provides a lifecycle phase for running integration tests that run after unit tests. By default, it looks for classes that are suffixed with `IT`, which stands for Integration Test. You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plug-in documentation^] for more information.
+When you integrate the Pact framework in a CI/CD build pipeline, you can use the Maven `failsafe:integration-test` goal to generate the pact file. The Maven `failsafe` plug-in provides a lifecycle phase for running integration tests that run after unit tests. By default, it looks for classes that are suffixed with `IT`, which stands for Integration Test. You can refer to the https://maven.apache.org/surefire/maven-failsafe-plugin/[Maven failsafe plug-in documentation^] for more information.
 
 The generated pact file is named `Inventory-System.json` and is located in the `inventory/target/pacts` directory. The pact file contains the defined interactions in JSON format:
 
@@ -209,22 +236,44 @@ The generated pact file is named `Inventory-System.json` and is located in the `
 ----
 
 ifndef::cloud-hosted[]
-Now, navigate to the `start/inventory` directory again.
+Now, navigate to the `start` directory again.
 endif::[]
 
 ifdef::cloud-hosted[]
-Open a new command-line session and navigate to the `start/inventory` directory.
+Open a new command-line session and navigate to the `start` directory.
 
 ```bash
-cd /home/project/guide-contract-testing/start/inventory
+cd /home/project/guide-contract-testing/start
 ```
 endif::[]
 
 Publish the generated pact file to the Pact Broker by running the following command:
+
+include::{common-includes}/os-tabs.adoc[]
+
+[.tab_content.windows_section]
+--
 [role='command']
 ```
-mvn pact:publish
+mvnw.cmd -f inventory\pom.xml pact:publish
 ```
+--
+
+[.tab_content.mac_section]
+--
+[role='command']
+```
+./mvnw -f inventory/pom.xml pact:publish
+```
+--
+
+[.tab_content.linux_section]
+--
+[role='command']
+```
+./mvnw -f inventory/pom.xml pact:publish
+```
+--
 
 After the file is published, you'll see a similar output to the following example:
 [role="no_copy"]
@@ -272,19 +321,41 @@ image::pact-broker-interactions.png[Pact Broker webpage for Interactions,width=9
 == Implementing pact testing in the system service
 
 
-Open another command-line session and navigate to the `start/system` directory.
+Open another command-line session and navigate to the `start` directory.
 
 ifdef::cloud-hosted[]
 ```bash
-cd /home/project/guide-contract-testing/start/system
+cd /home/project/guide-contract-testing/start
 ```
 endif::[]
 
 Start Open Liberty in dev mode for the `system` microservice:
-[role=command]
+
+include::{common-includes}/os-tabs.adoc[]
+
+[.tab_content.windows_section]
+--
+[role='command']
 ```
-mvn liberty:dev
+mvnw.cmd -f system\pom.xml liberty:dev
 ```
+--
+
+[.tab_content.mac_section]
+--
+[role='command']
+```
+./mvnw -f system/pom.xml liberty:dev
+```
+--
+
+[.tab_content.linux_section]
+--
+[role='command']
+```
+./mvnw -f system/pom.xml liberty:dev
+```
+--
 
 After you see the following message, your Liberty instance is ready in dev mode:
 
@@ -296,7 +367,7 @@ After you see the following message, your Liberty instance is ready in dev mode:
 {empty} +
 
 ifndef::cloud-hosted[]
-Open another command-line session and navigate back to the `start` directory to continue.
+Open another command-line session and navigate to the `start` directory to continue.
 endif::[]
 
 ifdef::cloud-hosted[]
@@ -347,7 +418,7 @@ After you create the `SystemBrokerIT.java` class and replace the `pom.xml` file,
 
 == Verifying the contract
 
-In the command-line session where you started the `system` microservice, press the `enter/return` key to run the tests to verify the pact file. When you integrate the Pact framework into a CI/CD build pipeline, you can use the `mvn failsafe:integration-test` goal to verify the pact file from the Pact Broker.
+In the command-line session where you started the `system` microservice, press the `enter/return` key to run the tests to verify the pact file. When you integrate the Pact framework into a CI/CD build pipeline, you can use the Maven `failsafe:integration-test` goal to verify the pact file from the Pact Broker.
 
 The tests fail with the following errors:
 [role="no_copy"]
@@ -436,7 +507,7 @@ endif::[]
 
 [role='command']
 ```
-docker-compose -f "pact-broker/docker-compose.yml" down
+docker compose -f "pact-broker/docker-compose.yml" down
 docker rmi postgres:17.2
 docker rmi pactfoundation/pact-broker:latest
 docker volume rm pact-broker_postgres-volume
